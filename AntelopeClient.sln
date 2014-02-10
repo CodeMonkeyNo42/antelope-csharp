@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AntelopeClient", "AntelopeClient\AntelopeClient.csproj", "{C9CA3062-24EF-4AF8-B601-29276510C2C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "Interfaces\Interfaces.csproj", "{684312F6-018A-4A7B-A900-DA0D99E2DFB6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersistenceModule", "PersistenceModule\PersistenceModule.csproj", "{50A929FC-14FF-4B00-A612-3E2F15DA6EAA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C9CA3062-24EF-4AF8-B601-29276510C2C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9CA3062-24EF-4AF8-B601-29276510C2C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9CA3062-24EF-4AF8-B601-29276510C2C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9CA3062-24EF-4AF8-B601-29276510C2C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{684312F6-018A-4A7B-A900-DA0D99E2DFB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{684312F6-018A-4A7B-A900-DA0D99E2DFB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{684312F6-018A-4A7B-A900-DA0D99E2DFB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{684312F6-018A-4A7B-A900-DA0D99E2DFB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50A929FC-14FF-4B00-A612-3E2F15DA6EAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50A929FC-14FF-4B00-A612-3E2F15DA6EAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50A929FC-14FF-4B00-A612-3E2F15DA6EAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50A929FC-14FF-4B00-A612-3E2F15DA6EAA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
+	EndGlobalSection
+EndGlobal
