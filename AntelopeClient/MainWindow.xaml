@@ -1,8 +1,10 @@
 ﻿<Window x:Class="AntelopeClient.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Antelope" Height="350" Width="525">
+        xmlns:regions="clr-namespace:Microsoft.Practices.Prism.Regions;assembly=Microsoft.Practices.Prism"
+        Title="Antelope">
     <Grid>
-        
+        <TabControl regions:RegionManager.RegionName="AntelopeClientTabRegion">
+        </TabControl>
     </Grid>
 </Window>

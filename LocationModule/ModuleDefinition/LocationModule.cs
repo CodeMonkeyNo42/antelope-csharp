@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.Prism.Modularity;
+﻿using LocationModule.Views;
+using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 using System;
@@ -39,7 +40,7 @@ namespace LocationModule.ModuleDefinition
         void RegisterViews()
         {
             // add Views to regions
-            // RegionManager.RegisterViewWithRegion("regionName", typeof(MyUSerControl));
+            RegionManager.RegisterViewWithRegion("AntelopeClientTabRegion", typeof(LocationModuleTabItemUserControl));
         }
 
         void RegisterEvents()

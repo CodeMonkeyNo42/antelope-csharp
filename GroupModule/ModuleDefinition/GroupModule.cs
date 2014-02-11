@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.Prism.Modularity;
+﻿using GroupModule.Views;
+using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 using System;
@@ -39,7 +40,7 @@ namespace GroupModule.ModuleDefinition
         void RegisterViews()
         {
             // add Views to regions
-            // RegionManager.RegisterViewWithRegion("regionName", typeof(MyUSerControl));
+            RegionManager.RegisterViewWithRegion("AntelopeClientTabRegion", typeof(GroupModuleTabItemUserControl));
         }
 
         void RegisterEvents()

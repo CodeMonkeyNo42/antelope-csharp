@@ -6,16 +6,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TeamModule.Views;
 
 namespace TeamModule.ModuleDefinition
 {
 
-    public class MatchModule : IModule
+    public class TeamModule : IModule
     {
         IUnityContainer UnityContainer { get; set; }
         IRegionManager RegionManager { get; set; }
 
-        public MatchModule(IUnityContainer unityContainer, IRegionManager regionManager)
+        public TeamModule(IUnityContainer unityContainer, IRegionManager regionManager)
         {
             UnityContainer = unityContainer;
             RegionManager = regionManager;
@@ -40,7 +41,7 @@ namespace TeamModule.ModuleDefinition
         void RegisterViews()
         {
             // add Views to regions
-            // RegionManager.RegisterViewWithRegion("regionName", typeof(MyUSerControl));
+            RegionManager.RegisterViewWithRegion("AntelopeClientTabRegion", typeof(TeamModuleTabItemUserControl));
         }
 
         void RegisterEvents()
