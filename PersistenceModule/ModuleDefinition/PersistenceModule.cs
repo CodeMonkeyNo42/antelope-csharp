@@ -45,7 +45,7 @@ namespace PersistenceModule.ModuleDefinition
 
         void RegisterEvents()
         {
-            // register Events to the eventaggregator
+            // register Events to the eventaggregator 
         }
     }
 }
