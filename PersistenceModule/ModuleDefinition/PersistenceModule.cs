@@ -1,5 +1,7 @@
 ﻿using Microsoft.Practices.Prism.Modularity;
+using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.ServiceLocation;
+using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,21 +10,42 @@ using System.Threading.Tasks;
 
 namespace PersistenceModule.ModuleDefinition
 {
-    class PersistenceModule : IModule
+    public class PersistenceModule : IModule
     {
-        IServiceLocator ServiceLocator { get; set; }
+        IUnityContainer UnityContainer { get; set; }
+        RegionManager RegionManager { get; set; }
 
-        PersistenceModule(IServiceLocator serviceLocator)
+        public PersistenceModule(IUnityContainer unityContainer, RegionManager regionManager)
         {
-            ServiceLocator = serviceLocator;
+            UnityContainer = unityContainer;
+            RegionManager = regionManager;
         }
 
 
         public void Initialize()
         {
-            // add Views to regions
+            RegisterServices();
+            RegisterViews();
+            RegisterEvents();
+        }
+
+        void RegisterServices()
+        {
             // add Services
-            throw new NotImplementedException();
+            // IMyService myService = ServiceLocator.GetInstance<IMyService>();
+            // or
+            // UnityContainer.RegisterType<IMyService, MyService>();
+        }
+
+        void RegisterViews()
+        {
+            // add Views to regions
+            // RegionManager.RegisterViewWithRegion("regionName", typeof(MyUSerControl));
+        }
+
+        void RegisterEvents()
+        {
+            // register Events to the eventaggregator
         }
     }
 }
