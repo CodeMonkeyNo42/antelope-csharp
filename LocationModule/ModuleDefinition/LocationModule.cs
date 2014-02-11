@@ -1,6 +1,5 @@
 ﻿using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
-using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
@@ -8,14 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PersistenceModule.ModuleDefinition
+namespace LocationModule.ModuleDefinition
 {
-    public class PersistenceModule : IModule
+    public class LocationModule : IModule
     {
         IUnityContainer UnityContainer { get; set; }
         IRegionManager RegionManager { get; set; }
 
-        public PersistenceModule(IUnityContainer unityContainer, IRegionManager regionManager)
+        public LocationModule(IUnityContainer unityContainer, IRegionManager regionManager)
         {
             UnityContainer = unityContainer;
             RegionManager = regionManager;
