@@ -4,7 +4,11 @@
         xmlns:regions="clr-namespace:Microsoft.Practices.Prism.Regions;assembly=Microsoft.Practices.Prism"
         Title="Antelope">
     <Grid>
-        <TabControl regions:RegionManager.RegionName="AntelopeClientTabRegion">
-        </TabControl>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <UserControl regions:RegionManager.RegionName="AntelopeClientLoginRegion" />
+        <TabControl Grid.Row="1" regions:RegionManager.RegionName="AntelopeClientTabRegion"/>
     </Grid>
 </Window>
