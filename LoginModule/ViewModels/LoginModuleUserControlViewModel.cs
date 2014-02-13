@@ -1,4 +1,7 @@
-﻿using Interfaces.utilities.Command;
+﻿using Interfaces.Events;
+using Interfaces.PersisenceModule.Services;
+using Interfaces.utilities.Command;
+using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -12,10 +15,18 @@ using System.Windows.Input;
 
 namespace LoginModule.ViewModels
 {
-    class LoginModuleUserControlViewModel : NotificationObject
+    public class LoginModuleUserControlViewModel : NotificationObject
     {
+        public LoginModuleUserControlViewModel(IRepositoryService repositoryService, IEventAggregator eventAggregator)
+        {
+            RepositoryService = repositoryService;
+            EventAggregator = eventAggregator;
+        }
 
-        private string login = "initial login";
+        private IEventAggregator EventAggregator { get; set; }
+        private IRepositoryService RepositoryService { get; set; }
+
+        private string login = "ante";
         public string Login 
         {
             get
@@ -45,7 +56,13 @@ namespace LoginModule.ViewModels
                         {
                             var pwBox = passwordBox as PasswordBox;
                             var password = pwBox.Password;
+
+                            EventAggregator.GetEvent<LoginAndPasswordChangedEvent>().Publish(new Tuple<string, string>(Login, password));
+
+                            // debug
                             MessageBox.Show(password);
+                            var location = RepositoryService.LocationRepository.GetLocation(1);
+                            MessageBox.Show(location.Name);
                         });
                 }
 

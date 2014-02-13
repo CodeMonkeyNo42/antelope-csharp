@@ -1,45 +1,42 @@
-﻿using PersistenceModule.Data.Datamodules;
+﻿using Microsoft.Practices.Prism.Events;
+using PersistenceModule.Data.Datamodules;
 using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Interfaces.Events;
 
 namespace PersistenceModule.Api
 {
     class AntelopeRestApi
     {
-        private static AntelopeRestApi instance;
-        public static AntelopeRestApi Instance
+        const string BaseUrl = @"https://antelope.circinus.uberspace.de/";
+
+        string Login { get; set; }
+        string Password { get; set; }
+        IEventAggregator EventAggregator { get; set; }
+
+        public AntelopeRestApi(IEventAggregator eventAggregator)
         {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new AntelopeRestApi("Ante", "Demo");
-                }
-                return instance;
-            }
+            EventAggregator = eventAggregator;
+
+            EventAggregator.GetEvent<LoginAndPasswordChangedEvent>().Subscribe(OnLoginAndPasswordChanged);
         }
 
-        const string BaseUrl = "https://antelope.circinus.uberspace.de/";
-
-        readonly string _accountSid;
-        readonly string _secretKey;
-
-        private AntelopeRestApi(string accountSid, string secretKey)
+        private void OnLoginAndPasswordChanged(Tuple<string,string> loginAndPassword)
         {
-            _accountSid = accountSid;
-            _secretKey = secretKey;
+            Login = loginAndPassword.Item1;
+            Password = loginAndPassword.Item2;
         }
 
         public T Execute<T>(RestRequest request) where T : new()
         {
             var client = new RestClient();
             client.BaseUrl = BaseUrl;
-            client.Authenticator = new HttpBasicAuthenticator(_accountSid, _secretKey);
-            request.AddParameter("AccountSid", _accountSid, ParameterType.UrlSegment); // used on every request
+            client.Authenticator = new HttpBasicAuthenticator(Login, Password);
+            request.AddParameter("AccountSid", Login, ParameterType.UrlSegment); // used on every request
 
             var response = client.Execute<T>(request);
 
@@ -68,6 +65,7 @@ namespace PersistenceModule.Api
         public List<Location> GetLocations()
         {
             var request = new RestRequest();
+            //request.RequestFormat = DataFormat.Json;
             //request.OnBeforeDeserialization = resp => { resp.ContentType = "application/json"; };
             request.Resource = "/locations";
             request.RootElement = "Locations";

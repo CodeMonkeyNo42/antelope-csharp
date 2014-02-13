@@ -1,5 +1,6 @@
 ﻿using Interfaces.PersisenceModule.Datamodule;
 using Interfaces.PersisenceModule.Repositories;
+using Microsoft.Practices.Unity;
 using PersistenceModule.Api;
 using PersistenceModule.Data.Datamodules;
 using System;
@@ -13,6 +14,12 @@ namespace PersistenceModule.Data.Repositories
 {
     class LocationRepository : ObservableCollection<ILocation>, ILocationRepository
     {
+        AntelopeRestApi AntelopeRestApi { get; set; }
+
+        public LocationRepository(AntelopeRestApi antelopeRestApi)
+        {
+            AntelopeRestApi = antelopeRestApi;
+        }
 
         protected override void OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
@@ -39,6 +46,11 @@ namespace PersistenceModule.Data.Repositories
             }
 
             base.OnCollectionChanged(e);
+        }
+
+        public ILocation GetLocation(int id)
+        {
+            return AntelopeRestApi.GetLocation(id);
         }
     }
 }

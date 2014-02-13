@@ -21,11 +21,11 @@ namespace LoginModule.Views
     /// </summary>
     public partial class LoginModuleUserControl : UserControl
     {
-        public LoginModuleUserControl()
+        public LoginModuleUserControl(LoginModuleUserControlViewModel viewModel)
         {
             InitializeComponent();
 
-            DataContext = new LoginModuleUserControlViewModel();
+            Loaded += (o,e) => DataContext = viewModel;
         }
     }
 }

@@ -1,7 +1,15 @@
-﻿using Microsoft.Practices.Prism.Modularity;
+﻿using Interfaces.PersisenceModule.Datamodule;
+using Interfaces.PersisenceModule.Repositories;
+using Interfaces.PersisenceModule.Services;
+using Microsoft.Practices.Prism.Events;
+using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
+using PersistenceModule.Api;
+using PersistenceModule.Data.Datamodules;
+using PersistenceModule.Data.Repositories;
+using PersistenceModule.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +42,12 @@ namespace PersistenceModule.ModuleDefinition
             // add Services
             // IMyService myService = ServiceLocator.GetInstance<IMyService>();
             // or
-            // UnityContainer.RegisterType<IMyService, MyService>();
+
+            UnityContainer.RegisterInstance<AntelopeRestApi>(new AntelopeRestApi(UnityContainer.Resolve<IEventAggregator>()));
+
+            UnityContainer.RegisterType<ILocation, Location>();
+            UnityContainer.RegisterType<ILocationRepository, LocationRepository>();
+            UnityContainer.RegisterType<IRepositoryService, RepositoryService>();
         }
 
         void RegisterViews()

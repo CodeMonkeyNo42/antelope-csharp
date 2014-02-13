@@ -10,6 +10,7 @@ namespace PersistenceModule.Data.Datamodules
 {
     class Location : NotificationObject, ILocation
     {
+
         private int id;
         public int Id
         {
@@ -40,6 +41,40 @@ namespace PersistenceModule.Data.Datamodules
                 {
                     name = value;
                     RaisePropertyChanged("Name");
+                }
+            }
+        }
+
+        private DateTime created_at;
+        public DateTime CreatedAt
+        {
+            get
+            {
+                return created_at;
+            }
+            set
+            {
+                if (created_at != value)
+                {
+                    created_at = value;
+                    RaisePropertyChanged("CreatedAt");
+                }
+            }
+        }
+
+        private DateTime updated_at;
+        public DateTime UpdatedAt
+        {
+            get
+            {
+                return updated_at;
+            }
+            set
+            {
+                if (updated_at != value)
+                {
+                    updated_at = value;
+                    RaisePropertyChanged("UpdatedAt");
                 }
             }
         }

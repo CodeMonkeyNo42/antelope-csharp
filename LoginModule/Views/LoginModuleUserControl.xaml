@@ -24,7 +24,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Label Margin="5" Content="Password"/>
-            <PasswordBox Margin="5" Name="txtPassword"  Grid.Column="1" Password="***"/>
+            <PasswordBox Margin="5" Name="txtPassword"  Grid.Column="1" Password="demo"/>
         </Grid>
         <Button Margin="5" Grid.Column="2" Content="Connect" Command="{Binding ConnectCommand}" CommandParameter="{Binding ElementName=txtPassword}" />
     </Grid>
