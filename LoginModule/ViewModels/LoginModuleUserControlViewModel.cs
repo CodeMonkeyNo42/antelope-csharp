@@ -1,4 +1,5 @@
 ﻿using Interfaces.utilities.Command;
+using Microsoft.Practices.Prism.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,9 +12,8 @@ using System.Windows.Input;
 
 namespace LoginModule.ViewModels
 {
-    class LoginModuleUserControlViewModel : INotifyPropertyChanged
+    class LoginModuleUserControlViewModel : NotificationObject
     {
-        public event PropertyChangedEventHandler PropertyChanged;
 
         private string login = "initial login";
         public string Login 
@@ -25,10 +25,7 @@ namespace LoginModule.ViewModels
             set
             {
                 login = value;
-                if (PropertyChanged != null)
-                {
-                    PropertyChanged(this, new PropertyChangedEventArgs("Login"));
-                }
+                RaisePropertyChanged("Login");
             }
         }
 

@@ -39,6 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PersisenceModule\Datamodule\ILocation.cs" />
+    <Compile Include="PersisenceModule\ILocationService.cs" />
+    <Compile Include="PersisenceModule\Repositories\ILocationRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="utilities\Command\MyCommand.cs" />
   </ItemGroup>
@@ -47,7 +50,6 @@
     <Folder Include="GroupModule\" />
     <Folder Include="LocationModule\" />
     <Folder Include="MatchModule\" />
-    <Folder Include="PersisenceModule\" />
     <Folder Include="TeamModule\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

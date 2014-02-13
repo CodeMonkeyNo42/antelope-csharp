@@ -66,15 +66,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Datamodules\Location.cs" />
+    <Compile Include="Data\Repositories\LocationRepository.cs" />
     <Compile Include="ModuleDefinition\PersistenceModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Api\AntelopeRestApi.cs" />
+    <Compile Include="Services\LocationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Interfaces\Interfaces.csproj">
       <Project>{684312f6-018a-4a7b-a900-da0d99e2dfb6}</Project>
