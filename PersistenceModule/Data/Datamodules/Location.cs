@@ -78,5 +78,22 @@ namespace PersistenceModule.Data.Datamodules
                 }
             }
         }
+
+        private string url;
+        public string Url
+        {
+            get
+            {
+                return url;
+            }
+            set
+            {
+                if (url != value)
+                {
+                    url = value;
+                    RaisePropertyChanged("Url");
+                }
+            }
+        }
     }
 }

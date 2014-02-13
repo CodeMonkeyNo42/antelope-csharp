@@ -61,8 +61,10 @@ namespace LoginModule.ViewModels
 
                             // debug
                             MessageBox.Show(password);
-                            var location = RepositoryService.LocationRepository.GetLocation(1);
+                            var location = RepositoryService.LocationRepository.GetLocation(2);
+                            var locations = RepositoryService.LocationRepository.GetLocations();
                             MessageBox.Show(location.Name);
+                            MessageBox.Show(locations.Count.ToString());
                         });
                 }
 

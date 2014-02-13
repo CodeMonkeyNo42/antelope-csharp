@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Interfaces.Events;
+using Interfaces.PersisenceModule.Datamodule;
+using RestSharp.Deserializers;
 
 namespace PersistenceModule.Api
 {
@@ -34,6 +36,7 @@ namespace PersistenceModule.Api
         public T Execute<T>(RestRequest request) where T : new()
         {
             var client = new RestClient();
+
             client.BaseUrl = BaseUrl;
             client.Authenticator = new HttpBasicAuthenticator(Login, Password);
             request.AddParameter("AccountSid", Login, ParameterType.UrlSegment); // used on every request
@@ -55,7 +58,7 @@ namespace PersistenceModule.Api
         {
             var request = new RestRequest();
             request.Resource = "/locations/{id}";
-            request.RootElement = "Location";
+            //request.RootElement = "Location";
 
             request.AddParameter("id", id, ParameterType.UrlSegment);
 
@@ -65,10 +68,12 @@ namespace PersistenceModule.Api
         public List<Location> GetLocations()
         {
             var request = new RestRequest();
+            
             //request.RequestFormat = DataFormat.Json;
             //request.OnBeforeDeserialization = resp => { resp.ContentType = "application/json"; };
+
             request.Resource = "/locations";
-            request.RootElement = "Locations";
+            //request.RootElement = "Locations"; // kein Rootelement für arrays setzen
 
             return Execute<List<Location>>(request);
         }
