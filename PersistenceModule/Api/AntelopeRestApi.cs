@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Interfaces.Events;
 using Interfaces.PersisenceModule.Datamodule;
 using RestSharp.Deserializers;
+using System.Collections.ObjectModel;
 
 namespace PersistenceModule.Api
 {
@@ -62,6 +63,28 @@ namespace PersistenceModule.Api
 
             request.AddParameter("id", id, ParameterType.UrlSegment);
 
+            return Execute<Location>(request);
+        }
+
+        public Location PostLocation(Location location)
+        {
+            var request = new RestRequest();
+            request.Method = Method.POST;
+            request.Resource = "/locations";
+            
+            request.AddHeader("Content-Type", "application/json");
+            request.AddHeader("Accept", "application/json");
+
+            
+
+            // ## first option ##
+            request.RequestFormat = DataFormat.Json;
+            //request.RootElement = "location";
+            request.AddBody( new { name = location.Name } );
+
+            // ## second option ##
+            // request.AddParameter("name", location.Name);
+ 
             return Execute<Location>(request);
         }
 

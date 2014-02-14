@@ -53,6 +53,11 @@ namespace PersistenceModule.Data.Repositories
             return AntelopeRestApi.GetLocation(id);
         }
 
+        public ILocation PostLocation(ILocation location)
+        {
+            return AntelopeRestApi.PostLocation(location as Location);
+        }
+
         public List<ILocation> GetLocations()
         {
             return new List<ILocation>(AntelopeRestApi.GetLocations());

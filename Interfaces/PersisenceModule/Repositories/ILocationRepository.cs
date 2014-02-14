@@ -13,6 +13,7 @@ namespace Interfaces.PersisenceModule.Repositories
     public interface ILocationRepository : INotifyCollectionChanged, INotifyPropertyChanged, ICollection<ILocation>
     {
         ILocation GetLocation(int id);
+        ILocation PostLocation(ILocation location);
         List<ILocation> GetLocations();
     }
 }

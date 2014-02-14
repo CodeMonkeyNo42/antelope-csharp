@@ -1,8 +1,10 @@
 ﻿using Interfaces.Events;
+using Interfaces.PersisenceModule.Datamodule;
 using Interfaces.PersisenceModule.Services;
 using Interfaces.utilities.Command;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.ViewModel;
+using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,14 +19,16 @@ namespace LoginModule.ViewModels
 {
     public class LoginModuleUserControlViewModel : NotificationObject
     {
-        public LoginModuleUserControlViewModel(IRepositoryService repositoryService, IEventAggregator eventAggregator)
+        public LoginModuleUserControlViewModel(IRepositoryService repositoryService, IEventAggregator eventAggregator, IUnityContainer unityContainer)
         {
             RepositoryService = repositoryService;
             EventAggregator = eventAggregator;
+            UnityContainer = unityContainer;
         }
 
         private IEventAggregator EventAggregator { get; set; }
         private IRepositoryService RepositoryService { get; set; }
+        IUnityContainer UnityContainer { get; set; }
 
         private string login = "ante";
         public string Login 
@@ -60,11 +64,20 @@ namespace LoginModule.ViewModels
                             EventAggregator.GetEvent<LoginAndPasswordChangedEvent>().Publish(new Tuple<string, string>(Login, password));
 
                             // debug
-                            MessageBox.Show(password);
-                            var location = RepositoryService.LocationRepository.GetLocation(2);
+                            //MessageBox.Show(password);
+                            //var location = RepositoryService.LocationRepository.GetLocation(2);
                             var locations = RepositoryService.LocationRepository.GetLocations();
-                            MessageBox.Show(location.Name);
                             MessageBox.Show(locations.Count.ToString());
+                            //MessageBox.Show(location.Name);
+                            
+
+                            var newLoc = UnityContainer.Resolve<ILocation>();
+                            newLoc.Name = "Test von c# " + DateTime.Now.ToString("R");
+                            var insertedLoc = RepositoryService.LocationRepository.PostLocation(newLoc);
+                            MessageBox.Show(insertedLoc.Id.ToString());
+
+                            var locations2 = RepositoryService.LocationRepository.GetLocations();
+                            MessageBox.Show(locations2.Count.ToString());
                         });
                 }
 
