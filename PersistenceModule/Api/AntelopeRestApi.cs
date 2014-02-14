@@ -88,6 +88,28 @@ namespace PersistenceModule.Api
             return Execute<Location>(request);
         }
 
+        public Location PutLocation(Location location)
+        {
+            var request = new RestRequest();
+            request.Method = Method.PUT;
+            request.Resource = "/locations";
+
+            request.AddHeader("Content-Type", "application/json");
+            request.AddHeader("Accept", "application/json");
+
+
+
+            // ## first option ##
+            request.RequestFormat = DataFormat.Json;
+            //request.RootElement = "location";
+            request.AddBody(new { id = location.Id, name = location.Name });
+
+            // ## second option ##
+            // request.AddParameter("name", location.Name);
+
+            return Execute<Location>(request);
+        }
+
         public List<Location> GetLocations()
         {
             var request = new RestRequest();

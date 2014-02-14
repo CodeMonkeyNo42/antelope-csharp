@@ -10,10 +10,12 @@ using System.Threading.Tasks;
 
 namespace Interfaces.PersisenceModule.Repositories
 {
-    public interface ILocationRepository : INotifyCollectionChanged, INotifyPropertyChanged, ICollection<ILocation>
+    public interface ILocationRepository
     {
         ILocation GetLocation(int id);
         ILocation PostLocation(ILocation location);
+        ILocation PutLocation(ILocation location);
         List<ILocation> GetLocations();
+        ObservableCollection<ILocation> GetLocations2();
     }
 }

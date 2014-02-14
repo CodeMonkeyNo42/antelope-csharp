@@ -65,19 +65,30 @@ namespace LoginModule.ViewModels
 
                             // debug
                             //MessageBox.Show(password);
+
+                            // get
                             //var location = RepositoryService.LocationRepository.GetLocation(2);
-                            var locations = RepositoryService.LocationRepository.GetLocations();
-                            MessageBox.Show(locations.Count.ToString());
+                            //var locations = RepositoryService.LocationRepository.GetLocations();
+                            //MessageBox.Show(locations.Count.ToString());
                             //MessageBox.Show(location.Name);
                             
-
+                            // post
                             var newLoc = UnityContainer.Resolve<ILocation>();
                             newLoc.Name = "Test von c# " + DateTime.Now.ToString("R");
-                            var insertedLoc = RepositoryService.LocationRepository.PostLocation(newLoc);
-                            MessageBox.Show(insertedLoc.Id.ToString());
+                            //var insertedLoc = RepositoryService.LocationRepository.PostLocation(newLoc);
+                            //MessageBox.Show(insertedLoc.Id.ToString());
 
-                            var locations2 = RepositoryService.LocationRepository.GetLocations();
-                            MessageBox.Show(locations2.Count.ToString());
+                            // put
+                            var locations = RepositoryService.LocationRepository.GetLocations2();
+                            //var location5 = locations.FirstOrDefault((i) => i.Id == 5);
+                            //location5.Name += " changed";
+
+                            locations.Add(newLoc);
+                            MessageBox.Show(newLoc.Name);
+
+                            // get
+                            //var locations2 = RepositoryService.LocationRepository.GetLocations();
+                            //MessageBox.Show(locations2.Count.ToString());
                         });
                 }
 
