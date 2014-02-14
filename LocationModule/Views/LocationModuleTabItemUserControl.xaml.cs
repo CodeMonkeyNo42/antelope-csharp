@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LocationModule.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,11 @@ namespace LocationModule.Views
     /// </summary>
     public partial class LocationModuleTabItemUserControl : TabItem
     {
-        public LocationModuleTabItemUserControl()
+        public LocationModuleTabItemUserControl(LocationModuleTabItemUserControlViewModel locationModuleTabItemUserControlViewModel)
         {
             InitializeComponent();
+
+            Loaded += (o, e) => DataContext = locationModuleTabItemUserControlViewModel;
         }
     }
 }

@@ -4,6 +4,46 @@
          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
          Header="Location">
-    <Grid Background="#FFE5E5E5"/>
+    <Grid Background="#FFE5E5E5">
+        <ListBox ItemsSource="{Binding Locations}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel IsItemsHost="True" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="#FF000000" BorderThickness="1,1,1,1" CornerRadius="8,8,8,8">
+                        <Expander Margin="5" >
+                            <Expander.Header>
+                                <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="Gray" FontSize="22" VerticalAlignment="Bottom" />
+                            </Expander.Header>
+                            <Grid Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <TextBlock Margin="5" FontWeight="Bold" >Id</TextBlock>
+                                <TextBlock Margin="5" Grid.Column="1" Text="{Binding Id}"/>
+                                <TextBlock Margin="5" Grid.Row="1" FontWeight="Bold">Name</TextBlock>
+                                <TextBlock Margin="5" Grid.Row="1" Grid.Column="1" Text="{Binding Name}"/>
+                                <TextBlock Margin="5" Grid.Row="2" Grid.ColumnSpan="2" Text="Placeholder for Picture" TextAlignment="Center"/>
+                            </Grid>
+                        </Expander>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black" />
+                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent" />
+            </ListBox.Resources>
+        </ListBox>
+    </Grid>
 </TabItem>
 

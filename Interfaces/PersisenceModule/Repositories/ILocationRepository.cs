@@ -15,7 +15,6 @@ namespace Interfaces.PersisenceModule.Repositories
         ILocation GetLocation(int id);
         ILocation PostLocation(ILocation location);
         ILocation PutLocation(ILocation location);
-        List<ILocation> GetLocations();
-        ObservableCollection<ILocation> GetLocations2();
+        ObservableCollection<ILocation> GetLocations();
     }
 }

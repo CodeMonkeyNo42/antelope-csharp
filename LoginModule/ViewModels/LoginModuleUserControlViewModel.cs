@@ -28,7 +28,7 @@ namespace LoginModule.ViewModels
 
         private IEventAggregator EventAggregator { get; set; }
         private IRepositoryService RepositoryService { get; set; }
-        IUnityContainer UnityContainer { get; set; }
+        private IUnityContainer UnityContainer { get; set; }
 
         private string login = "ante";
         public string Login 
@@ -62,29 +62,33 @@ namespace LoginModule.ViewModels
                             var password = pwBox.Password;
 
                             EventAggregator.GetEvent<LoginAndPasswordChangedEvent>().Publish(new Tuple<string, string>(Login, password));
-
+                            EventAggregator.GetEvent<RefreshViewsEvent>().Publish("");
                             // debug
                             //MessageBox.Show(password);
 
+                            // get ok
+                            // post ok 
+                            // put nok
+
+
                             // get
-                            //var location = RepositoryService.LocationRepository.GetLocation(2);
+                            var location = RepositoryService.LocationRepository.GetLocation(2);
                             //var locations = RepositoryService.LocationRepository.GetLocations();
                             //MessageBox.Show(locations.Count.ToString());
-                            //MessageBox.Show(location.Name);
+                            MessageBox.Show(location.Name);
                             
                             // post
-                            var newLoc = UnityContainer.Resolve<ILocation>();
-                            newLoc.Name = "Test von c# " + DateTime.Now.ToString("R");
+                            // var newLoc = UnityContainer.Resolve<ILocation>();
+                            // newLoc.Name = "Test von c# " + DateTime.Now.ToString("R");
                             //var insertedLoc = RepositoryService.LocationRepository.PostLocation(newLoc);
                             //MessageBox.Show(insertedLoc.Id.ToString());
 
                             // put
-                            var locations = RepositoryService.LocationRepository.GetLocations2();
+                            //var locations = RepositoryService.LocationRepository.GetLocations2();
                             //var location5 = locations.FirstOrDefault((i) => i.Id == 5);
                             //location5.Name += " changed";
 
-                            locations.Add(newLoc);
-                            MessageBox.Show(newLoc.Name);
+                            //MessageBox.Show(location5.Name);
 
                             // get
                             //var locations2 = RepositoryService.LocationRepository.GetLocations();

@@ -36,13 +36,7 @@ namespace PersistenceModule.Data.Repositories
             return AntelopeRestApi.PutLocation(location as Location);
         }
 
-        public List<ILocation> GetLocations()
-        {
-            // ObservableCollection<ILocation>
-            return new List<ILocation>(AntelopeRestApi.GetLocations());
-        }
-
-        public ObservableCollection<ILocation> GetLocations2()
+        public ObservableCollection<ILocation> GetLocations()
         {
             var observableCollection = new ObservableCollection<ILocation>(AntelopeRestApi.GetLocations());
 

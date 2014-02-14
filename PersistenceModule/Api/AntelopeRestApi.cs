@@ -40,7 +40,13 @@ namespace PersistenceModule.Api
 
             client.BaseUrl = BaseUrl;
             client.Authenticator = new HttpBasicAuthenticator(Login, Password);
-            request.AddParameter("AccountSid", Login, ParameterType.UrlSegment); // used on every request
+
+            // used on every request
+            request.AddHeader("User-Agent", "antelope-csharp/1.0 (alpha Version)");
+            request.AddHeader("Content-Type", "application/json");
+            request.AddHeader("Accept", "application/json");
+            request.AddParameter("AccountSid", Login, ParameterType.UrlSegment);
+            
 
             var response = client.Execute<T>(request);
 
@@ -71,11 +77,6 @@ namespace PersistenceModule.Api
             var request = new RestRequest();
             request.Method = Method.POST;
             request.Resource = "/locations";
-            
-            request.AddHeader("Content-Type", "application/json");
-            request.AddHeader("Accept", "application/json");
-
-            
 
             // ## first option ##
             request.RequestFormat = DataFormat.Json;
@@ -93,11 +94,6 @@ namespace PersistenceModule.Api
             var request = new RestRequest();
             request.Method = Method.PUT;
             request.Resource = "/locations";
-
-            request.AddHeader("Content-Type", "application/json");
-            request.AddHeader("Accept", "application/json");
-
-
 
             // ## first option ##
             request.RequestFormat = DataFormat.Json;
