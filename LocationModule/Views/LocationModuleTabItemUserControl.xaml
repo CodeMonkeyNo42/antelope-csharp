@@ -3,8 +3,22 @@
          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
-         Header="Location">
-    <Grid Background="#FFE5E5E5">
+         Header="Location" FontFamily="Aller" >
+    <TabItem.Resources>
+        <Style TargetType="TabItem">
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#EE7C15" />
+                    <Setter Property="Foreground" Value="White" />
+                </Trigger>
+                <Trigger Property="IsSelected" Value="False">
+                    <Setter Property="Background" Value="#272627" />
+                    <Setter Property="Foreground" Value="White" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </TabItem.Resources>
+    <Grid >
         <ListBox ItemsSource="{Binding Locations}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -13,10 +27,10 @@
             </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderBrush="#FF000000" BorderThickness="1,1,1,1" CornerRadius="8,8,8,8">
+                    <Border BorderBrush="#FF000000" BorderThickness="1,1,1,1" CornerRadius="8,8,8,8" >
                         <Expander Margin="5" >
                             <Expander.Header>
-                                <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="Gray" FontSize="22" VerticalAlignment="Bottom" />
+                                <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="Gray" FontSize="22" VerticalAlignment="Bottom" FontFamily="Aller" />
                             </Expander.Header>
                             <Grid Margin="5">
                                 <Grid.ColumnDefinitions>
@@ -28,21 +42,16 @@
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-                                <TextBlock Margin="5" FontWeight="Bold" >Id</TextBlock>
-                                <TextBlock Margin="5" Grid.Column="1" Text="{Binding Id}"/>
-                                <TextBlock Margin="5" Grid.Row="1" FontWeight="Bold">Name</TextBlock>
-                                <TextBlock Margin="5" Grid.Row="1" Grid.Column="1" Text="{Binding Name}"/>
-                                <TextBlock Margin="5" Grid.Row="2" Grid.ColumnSpan="2" Text="Placeholder for Picture" TextAlignment="Center"/>
+                                <TextBlock Margin="5" FontWeight="Bold" FontFamily="Aller Light" >Id</TextBlock>
+                                <TextBlock Margin="5" Grid.Column="1" Text="{Binding Id}" FontFamily="Aller Light"/>
+                                <TextBlock Margin="5" Grid.Row="1" FontWeight="Bold" FontFamily="Aller Light" >Name</TextBlock>
+                                <TextBlock Margin="5" Grid.Row="1" Grid.Column="1" Text="{Binding Name}" FontFamily="Aller Light" />
+                                <TextBlock Margin="5" Grid.Row="2" Grid.ColumnSpan="2" Text="Placeholder for Picture" TextAlignment="Center" FontFamily="Aller Light" />
                             </Grid>
                         </Expander>
                     </Border>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-            <ListBox.Resources>
-                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
-                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black" />
-                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent" />
-            </ListBox.Resources>
         </ListBox>
     </Grid>
 </TabItem>

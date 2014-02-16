@@ -15,7 +15,7 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Label Margin="5" Content="Login"/>
+            <Label Margin="5" Content="Login" Foreground="White"/>
             <TextBox Margin="5" Grid.Column="1" Text="{Binding Login}"/>
         </Grid>
         <Grid Grid.Column="1">
@@ -23,7 +23,7 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Label Margin="5" Content="Password"/>
+            <Label Margin="5" Content="Password" Foreground="White"/>
             <PasswordBox Margin="5" Name="txtPassword"  Grid.Column="1" Password="demo"/>
         </Grid>
         <Button Margin="5" Grid.Column="2" Content="Connect" Command="{Binding ConnectCommand}" CommandParameter="{Binding ElementName=txtPassword}" />
