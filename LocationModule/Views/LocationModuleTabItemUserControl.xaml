@@ -3,23 +3,44 @@
          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
-         Header="Location" FontFamily="Aller" >
+         Header="Location" 
+         FontFamily="Aller" 
+         BorderBrush="{x:Null}" 
+         Foreground="White" 
+         Background="#FF272627" 
+         Style="{DynamicResource MyTabItem}"
+          >
     <TabItem.Resources>
-        <Style TargetType="TabItem">
-            <Style.Triggers>
-                <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="Background" Value="#EE7C15" />
-                    <Setter Property="Foreground" Value="White" />
-                </Trigger>
-                <Trigger Property="IsSelected" Value="False">
-                    <Setter Property="Background" Value="#272627" />
-                    <Setter Property="Foreground" Value="White" />
-                </Trigger>
-            </Style.Triggers>
+        <ResourceDictionary>
+        <Style x:Key="MyTabItem" TargetType="{x:Type TabItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                        <Grid Name="Panel">
+                            <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="10,2"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Foreground" Value="#EE7C15" />
+                                <Setter Property="Background" Value="#272627" />
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="False">
+                                <Setter Property="Foreground" Value="White" />
+                                <Setter Property="Background" Value="#272627" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
+            </ResourceDictionary>
     </TabItem.Resources>
     <Grid >
-        <ListBox ItemsSource="{Binding Locations}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+        <ListBox ItemsSource="{Binding Locations}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" >
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel IsItemsHost="True" />
@@ -30,7 +51,7 @@
                     <Border BorderBrush="#FF000000" BorderThickness="1,1,1,1" CornerRadius="8,8,8,8" >
                         <Expander Margin="5" >
                             <Expander.Header>
-                                <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="Gray" FontSize="22" VerticalAlignment="Bottom" FontFamily="Aller" />
+                                <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="White" FontSize="22" VerticalAlignment="Bottom" FontFamily="Aller" />
                             </Expander.Header>
                             <Grid Margin="5">
                                 <Grid.ColumnDefinitions>
@@ -42,11 +63,11 @@
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-                                <TextBlock Margin="5" FontWeight="Bold" FontFamily="Aller Light" >Id</TextBlock>
-                                <TextBlock Margin="5" Grid.Column="1" Text="{Binding Id}" FontFamily="Aller Light"/>
-                                <TextBlock Margin="5" Grid.Row="1" FontWeight="Bold" FontFamily="Aller Light" >Name</TextBlock>
-                                <TextBlock Margin="5" Grid.Row="1" Grid.Column="1" Text="{Binding Name}" FontFamily="Aller Light" />
-                                <TextBlock Margin="5" Grid.Row="2" Grid.ColumnSpan="2" Text="Placeholder for Picture" TextAlignment="Center" FontFamily="Aller Light" />
+                                <TextBlock Margin="5" FontWeight="Bold" FontFamily="Aller Light" Foreground="White" >Id</TextBlock>
+                                <TextBlock Margin="5" Grid.Column="1" Text="{Binding Id}" FontFamily="Aller Light" Foreground="White" />
+                                <TextBlock Margin="5" Grid.Row="1" FontWeight="Bold" FontFamily="Aller Light" Foreground="White" >Name</TextBlock>
+                                <TextBlock Margin="5" Grid.Row="1" Grid.Column="1" Text="{Binding Name}" FontFamily="Aller Light" Foreground="White" />
+                                <TextBlock Margin="5" Grid.Row="2" Grid.ColumnSpan="2" Text="Placeholder for Picture" TextAlignment="Center" FontFamily="Aller Light" Foreground="White" />
                             </Grid>
                         </Expander>
                     </Border>

@@ -3,7 +3,7 @@
          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
-         Header="Match">
-    <Grid Background="#FFE5E5E5"/>
+         Header="Match" FontFamily="Aller" BorderBrush="{x:Null}" Foreground="White" Background="#FF272627">
+    <Grid />
 </TabItem>
 

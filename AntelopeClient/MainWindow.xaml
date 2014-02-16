@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:regions="clr-namespace:Microsoft.Practices.Prism.Regions;assembly=Microsoft.Practices.Prism"
         Title="Antelope" 
-        Background="#FF272627" 
+        Background="#272627" 
         SnapsToDevicePixels="True"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
@@ -35,38 +35,45 @@
                     </Setter>
                 </Style>
             </DockPanel.Resources>
-            <Button x:Name="CloseButton" Margin="2" Content=" X " DockPanel.Dock="Right" Click="CloseButton_Click" Background="#FF272627" BorderBrush="{x:Null}" />
-            <Button x:Name="MaxButton" Margin="2" Content="MAX" DockPanel.Dock="Right" Click="MaximizeButton_Click" Background="#FF272627" BorderBrush="{x:Null}" />
-            <Button x:Name="MinButton" Margin="2" Content="MIN" DockPanel.Dock="Right" Click="MinimizeButton_Click" Background="#FF272627" BorderBrush="{x:Null}" />
+            <Button x:Name="CloseButton" Margin="2" Content=" X " DockPanel.Dock="Right" Click="CloseButton_Click" Background="#272627" BorderBrush="{x:Null}" FontFamily="Aller" />
+            <Button x:Name="MaxButton" Margin="2" Content="MAX" DockPanel.Dock="Right" Click="MaximizeButton_Click" Background="#272627" BorderBrush="{x:Null}" FontFamily="Aller" />
+            <Button x:Name="MinButton" Margin="2" Content="MIN" DockPanel.Dock="Right" Click="MinimizeButton_Click" Background="#272627" BorderBrush="{x:Null}" FontFamily="Aller" />
 
-            <TextBlock TextAlignment="Center" Foreground="White">Antelope</TextBlock>
+            <TextBlock TextAlignment="Center" Foreground="White" FontFamily="Exo 2.0 Medium" FontSize="14">Antelope</TextBlock>
         </DockPanel>
-        <Grid Background="#FF272627">
+        <Grid >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <UserControl regions:RegionManager.RegionName="AntelopeClientLoginRegion" Background="#FF272627" />
-            <TabControl Grid.Row="1" regions:RegionManager.RegionName="AntelopeClientTabRegion" TabStripPlacement="Left" Background="#FF272627" BorderBrush="{x:Null}"/>
+            <UserControl regions:RegionManager.RegionName="AntelopeClientLoginRegion" Background="#272627" />
+            <TabControl Grid.Row="1" regions:RegionManager.RegionName="AntelopeClientTabRegion" TabStripPlacement="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">
+            </TabControl>
         </Grid>
     </DockPanel>
     <Window.Resources>
-        <Style TargetType="Button">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Foreground" Value="#EE7C15" />
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="False">
-                                <Setter Property="Foreground" Value="White" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                        <ContentPresenter />
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
+            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Transparent" />
+            <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="#272627" />
+        
+            <Style TargetType="Button">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Foreground" Value="#EE7C15" />
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="False">
+                                    <Setter Property="Foreground" Value="White" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                            <ContentPresenter />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
     </Window.Resources>
 </Window>
