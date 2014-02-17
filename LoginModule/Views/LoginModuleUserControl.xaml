@@ -20,19 +20,19 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Label Margin="5" Content="Login" Foreground="White" FontFamily="Aller"/>
-            <TextBox Margin="5" Grid.Column="1" Text="{Binding Login}" SelectionBrush="#FFEE7C15" Foreground="White" Background="#FF41454C" BorderBrush="{x:Null}" FontFamily="Aller"/>
+            <Label Margin="5" Content="Login" Foreground="White" FontFamily="Aller" FontSize="24"/>
+            <TextBox Margin="5" Grid.Column="1" Text="{Binding Login}" SelectionBrush="#FFEE7C15" Foreground="White" Background="#FF41454C" BorderBrush="{x:Null}" FontFamily="Aller" FontSize="24"/>
         </Grid>
         <Grid Grid.Column="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Label Margin="5" Content="Password" Foreground="White" FontFamily="Aller"/>
-            <PasswordBox Margin="5" Name="txtPassword"  Grid.Column="1" Password="demo" SelectionBrush="#FFEE7C15" Foreground="White" Background="#FF41454C" BorderBrush="{x:Null}" FontFamily="Aller"/>
+            <Label Margin="5" Content="Password" Foreground="White" FontFamily="Aller" FontSize="24"/>
+            <PasswordBox Margin="5" Name="txtPassword"  Grid.Column="1" Password="demo" SelectionBrush="#FFEE7C15" Foreground="White" Background="#FF41454C" BorderBrush="{x:Null}" FontFamily="Aller" FontSize="24"/>
         </Grid>
         <Grid Grid.Column="2">
-            <Button Margin="5"  Content="Connect" Command="{Binding ConnectCommand}" CommandParameter="{Binding ElementName=txtPassword}" FontFamily="Aller" VerticalAlignment="Center" HorizontalAlignment="Left" />
+            <Button Margin="5"  Content="Connect" Command="{Binding ConnectCommand}" CommandParameter="{Binding ElementName=txtPassword}" FontFamily="Aller" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="24" />
         </Grid>
     </Grid>
 </UserControl>

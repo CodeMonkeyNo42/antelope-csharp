@@ -3,7 +3,7 @@
          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
-         Header="Championship" FontFamily="Aller" BorderBrush="{x:Null}" Foreground="White" Background="#FF272627" Style="{DynamicResource MyTabItem}" MouseEnter="TabItem_MouseEnter" MouseLeave="TabItem_MouseLeave" >
+         Header="Championship" FontFamily="Aller" BorderBrush="{x:Null}" Foreground="White" Background="#FF272627" Style="{DynamicResource MyTabItem}" MouseEnter="TabItem_MouseEnter" MouseLeave="TabItem_MouseLeave" FontSize="24" >
     <TabItem.Resources>
         <ResourceDictionary>
             <Style x:Key="MyTabItem" TargetType="{x:Type TabItem}">

@@ -8,7 +8,7 @@
          BorderBrush="{x:Null}" 
          Foreground="White" 
          Background="#FF272627" 
-         Style="{DynamicResource MyTabItem}" MouseEnter="TabItem_MouseEnter" MouseLeave="TabItem_MouseLeave"
+         Style="{DynamicResource MyTabItem}" MouseEnter="TabItem_MouseEnter" MouseLeave="TabItem_MouseLeave" FontSize="24"
           >
     <TabItem.Resources>
         <ResourceDictionary>

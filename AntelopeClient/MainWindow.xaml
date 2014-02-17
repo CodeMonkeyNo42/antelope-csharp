@@ -44,15 +44,22 @@
         <Grid >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <UserControl regions:RegionManager.RegionName="AntelopeClientLoginRegion" Background="#272627" />
-            <TabControl Name="tabcontrol" Grid.Row="1" regions:RegionManager.RegionName="AntelopeClientTabRegion" TabStripPlacement="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" IsSynchronizedWithCurrentItem="True" >
+            <Ellipse Grid.Row="1" Margin="5" Width="200" Height="200" HorizontalAlignment="Left" VerticalAlignment="Top" UseLayoutRounding="False">
+                <Ellipse.Fill>
+                    <ImageBrush RenderOptions.BitmapScalingMode="HighQuality" ImageSource="/AntelopeClient;component/Resources/antelope-cropped-gimp-small.jpg" Stretch="UniformToFill"/>
+                </Ellipse.Fill>
+            </Ellipse>
+            <TabControl Name="tabcontrol" Grid.Row="2" regions:RegionManager.RegionName="AntelopeClientTabRegion" TabStripPlacement="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" IsSynchronizedWithCurrentItem="True" >
             </TabControl>
         </Grid>
     </DockPanel>
     <Window.Resources>
         <ResourceDictionary>
+            
             <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
             <!-- <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Transparent" /> -->
             <!-- <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="#272627" /> -->

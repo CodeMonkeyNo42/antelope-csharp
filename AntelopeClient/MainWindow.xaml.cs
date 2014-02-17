@@ -23,7 +23,7 @@ namespace AntelopeClient
         public MainWindow()
         {
             InitializeComponent();
-
+            // x:Static AntelopeClient.Properties.Resources.antelope_cropped_gimp
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
