@@ -24,5 +24,16 @@ namespace TeamModule.Views
         {
             InitializeComponent();
         }
+
+        private void TabItem_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Foreground = new SolidColorBrush(new Color() { R = 238, G = 124, B = 21, A = 255 });
+        }
+
+        private void TabItem_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (!IsSelected)
+                Foreground = new SolidColorBrush(new Color() { R = 255, G = 255, B = 255, A = 255 });
+        }
     }
 }

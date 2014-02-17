@@ -4,6 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              >
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -16,7 +21,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Label Margin="5" Content="Login" Foreground="White" FontFamily="Aller"/>
-            <TextBox Margin="5" Grid.Column="1" Text="{Binding Login}" SelectionBrush="#FFEE7C15" Foreground="White" Background="#FF41454C" BorderBrush="{x:Null}"/>
+            <TextBox Margin="5" Grid.Column="1" Text="{Binding Login}" SelectionBrush="#FFEE7C15" Foreground="White" Background="#FF41454C" BorderBrush="{x:Null}" FontFamily="Aller"/>
         </Grid>
         <Grid Grid.Column="1">
             <Grid.ColumnDefinitions>
@@ -24,10 +29,10 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Label Margin="5" Content="Password" Foreground="White" FontFamily="Aller"/>
-            <PasswordBox Margin="5" Name="txtPassword"  Grid.Column="1" Password="demo" SelectionBrush="#FFEE7C15" Foreground="White" Background="#FF41454C" BorderBrush="{x:Null}"/>
+            <PasswordBox Margin="5" Name="txtPassword"  Grid.Column="1" Password="demo" SelectionBrush="#FFEE7C15" Foreground="White" Background="#FF41454C" BorderBrush="{x:Null}" FontFamily="Aller"/>
         </Grid>
         <Grid Grid.Column="2">
-            <Button Margin="5"  Content="Connect" Command="{Binding ConnectCommand}" CommandParameter="{Binding ElementName=txtPassword}" FontFamily="Aller" VerticalAlignment="Center" />
+            <Button Margin="5"  Content="Connect" Command="{Binding ConnectCommand}" CommandParameter="{Binding ElementName=txtPassword}" FontFamily="Aller" VerticalAlignment="Center" HorizontalAlignment="Left" />
         </Grid>
     </Grid>
 </UserControl>

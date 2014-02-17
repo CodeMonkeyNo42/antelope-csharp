@@ -13,7 +13,7 @@
         AllowsTransparency="True"
         ResizeMode="CanResizeWithGrip"
         BorderThickness="1" 
-        BorderBrush="Black">
+        BorderBrush="Black" Loaded="Window_Loaded">
     <DockPanel x:Name="RootWindow">
         <DockPanel x:Name="TitleBar" DockPanel.Dock="Top" MouseDown="TitleBar_MouseDown">
             <DockPanel.Resources>
@@ -47,15 +47,15 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <UserControl regions:RegionManager.RegionName="AntelopeClientLoginRegion" Background="#272627" />
-            <TabControl Grid.Row="1" regions:RegionManager.RegionName="AntelopeClientTabRegion" TabStripPlacement="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">
+            <TabControl Name="tabcontrol" Grid.Row="1" regions:RegionManager.RegionName="AntelopeClientTabRegion" TabStripPlacement="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" IsSynchronizedWithCurrentItem="True" >
             </TabControl>
         </Grid>
     </DockPanel>
     <Window.Resources>
         <ResourceDictionary>
             <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
-            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Transparent" />
-            <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="#272627" />
+            <!-- <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Transparent" /> -->
+            <!-- <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="#272627" /> -->
         
             <Style TargetType="Button">
                 <Setter Property="Template">

@@ -23,6 +23,13 @@ namespace AntelopeClient
         public MainWindow()
         {
             InitializeComponent();
+
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            ItemCollection view = tabcontrol.Items;
+            view.CurrentChanged += new EventHandler(TabControl_SelectionChanged);
         }
 
 
@@ -83,5 +90,29 @@ namespace AntelopeClient
             }
 
         }
+
+        private void TabControl_SelectionChanged(object sender, EventArgs e)
+        {
+            var itemCollection = sender as ItemCollection;
+            foreach (var item in itemCollection)
+            {
+                var tabItem = item as TabItem;
+                if (tabItem == itemCollection.CurrentItem)
+                {
+                    // Foreground = new SolidColorBrush(new Color() { R = 238, G = 124, B = 21, A = 255 });
+                    tabItem.Foreground = new SolidColorBrush(new Color() { R = 238, G = 124, B = 21, A = 255 });
+                }
+                else
+                {
+                    // Foreground = new SolidColorBrush(new Color() { R = 255, G = 255, B = 255, A = 255 });
+                    tabItem.Foreground = new SolidColorBrush(new Color() { R = 255, G = 255, B = 255, A = 255 });
+                }
+
+            }
+            
+        }
+
+        
+
     }
 }
