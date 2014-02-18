@@ -5,13 +5,14 @@
          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
          Header="Location" 
          FontFamily="Aller" 
-         BorderBrush="{x:Null}" 
+         BorderBrush="#FF9B2121" 
          Foreground="White" 
          Background="#FF272627" 
-         Style="{DynamicResource MyTabItem}" MouseEnter="TabItem_MouseEnter" MouseLeave="TabItem_MouseLeave" FontSize="24"
+         Style="{DynamicResource MyTabItem}" MouseEnter="TabItem_MouseEnter" MouseLeave="TabItem_MouseLeave" FontSize="24" BorderThickness="0,1"
           >
     <TabItem.Resources>
         <ResourceDictionary>
+            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
             <Style x:Key="MyTabItem" TargetType="{x:Type TabItem}">
                 <Setter Property="Template">
                     <Setter.Value>

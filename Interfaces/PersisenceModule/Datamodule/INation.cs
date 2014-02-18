@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Interfaces.PersisenceModule.Datamodule
 {
-    public interface ILocation : IDatamodul
+    public interface INation : IDatamodul
     {
         string Name { get; set; }
+        string Continent { get; set; }
         DateTime CreatedAt { get; set; }
         DateTime UpdatedAt { get; set; }
         string Url { get; set; }

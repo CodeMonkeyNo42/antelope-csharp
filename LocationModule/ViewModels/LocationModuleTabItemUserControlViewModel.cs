@@ -39,7 +39,7 @@ namespace LocationModule.ViewModels
             {
                 if (locations == null)
                 {
-                    locations = RepositoryService.LocationRepository.GetLocations();
+                    locations = RepositoryService.LocationRepository.GetCollection();
                     RaisePropertyChanged("Locations");
                 }
             }
@@ -47,7 +47,7 @@ namespace LocationModule.ViewModels
 
         public void Refresh(object obj)
         {
-            Locations = RepositoryService.LocationRepository.GetLocations();
+            Locations = RepositoryService.LocationRepository.GetCollection();
         }
     }
 }

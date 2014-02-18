@@ -16,8 +16,8 @@ namespace PersistenceModule.Api
 {
     class AntelopeRestApi
     {
-        //const string BaseUrl = @"https://antelope.circinus.uberspace.de/";
-        const string BaseUrl = @"https://antelope:8443/"; // ip für antelope in c:\windows\system32\drivers\etc\hosts konfiguriert
+        const string BaseUrl = @"https://antelope.circinus.uberspace.de/";
+        //const string BaseUrl = @"https://antelope:8443/"; // ip für antelope in c:\windows\system32\drivers\etc\hosts konfiguriert
 
         string Login { get; set; }
         string Password { get; set; }
@@ -65,63 +65,51 @@ namespace PersistenceModule.Api
             return response.Data;
         }
 
-
-        public Location GetLocation(int id)
+        public DatamoduleType Get<DatamoduleType>(int id) where DatamoduleType : IDatamodul, new()
         {
             var request = new RestRequest();
-            request.Resource = "/locations/{id}";
-            //request.RootElement = "Location";
+            var datamodule = new DatamoduleType();
 
-            request.AddParameter("id", id, ParameterType.UrlSegment);
+            request.Resource = "/" + datamodule.GetRequestUrlPart() + "/" + id.ToString();
 
-            return Execute<Location>(request);
+            return Execute<DatamoduleType>(request);
         }
 
-        public Location PostLocation(Location location)
+        public DatamoduleType Post<DatamoduleType>(DatamoduleType datamodul) where DatamoduleType : IDatamodul, new()
         {
             var request = new RestRequest();
+
             request.Method = Method.POST;
-            request.Resource = "/locations";
+            request.Resource = "/" + datamodul.GetRequestUrlPart();
 
-            // ## first option ##
             request.RequestFormat = DataFormat.Json;
-            //request.RootElement = "location";
-            request.AddBody( new { name = location.Name } );
+            request.AddBody(datamodul.GetPostObject());
 
-            // ## second option ##
-            // request.AddParameter("name", location.Name);
- 
-            return Execute<Location>(request);
+            return Execute<DatamoduleType>(request);
         }
 
-        public Location PutLocation(Location location)
+        public DatamoduleType Put<DatamoduleType>(DatamoduleType datamodul) where DatamoduleType : IDatamodul, new()
         {
             var request = new RestRequest();
+
             request.Method = Method.PUT;
-            request.Resource = "/locations";
+            request.Resource = "/" + datamodul.GetRequestUrlPart() + "/" + datamodul.Id;
 
-            // ## first option ##
             request.RequestFormat = DataFormat.Json;
-            //request.RootElement = "location";
-            request.AddBody(new { id = location.Id, name = location.Name });
+            request.AddBody(datamodul.GetPutObject());
 
-            // ## second option ##
-            // request.AddParameter("name", location.Name);
-
-            return Execute<Location>(request);
+            return Execute<DatamoduleType>(request);
         }
 
-        public List<Location> GetLocations()
+        public List<DatamoduleType> GetCollection<DatamoduleType>() where DatamoduleType : IDatamodul, new()
         {
             var request = new RestRequest();
-            
-            //request.RequestFormat = DataFormat.Json;
-            //request.OnBeforeDeserialization = resp => { resp.ContentType = "application/json"; };
+            var datamodule = new DatamoduleType();
 
-            request.Resource = "/locations";
-            //request.RootElement = "Locations"; // kein Rootelement für arrays setzen
+            request.Resource = "/" + datamodule.GetRequestUrlPart();
 
-            return Execute<List<Location>>(request);
+            return Execute<List<DatamoduleType>>(request);
         }
+
     }
 }

@@ -67,7 +67,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Datamodules\Location.cs" />
+    <Compile Include="Data\Datamodules\Nation.cs" />
     <Compile Include="Data\Repositories\LocationRepository.cs" />
+    <Compile Include="Data\Repositories\NationRepository.cs" />
+    <Compile Include="Data\Repositories\Repository.cs" />
     <Compile Include="ModuleDefinition\PersistenceModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Api\AntelopeRestApi.cs" />

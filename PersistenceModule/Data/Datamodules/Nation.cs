@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PersistenceModule.Data.Datamodules
 {
-    class Location : NotificationObject, IDatamodul, ILocation
+    class Nation : NotificationObject, IDatamodul, INation
     {
 
         private int id;
@@ -41,6 +41,23 @@ namespace PersistenceModule.Data.Datamodules
                 {
                     name = value;
                     RaisePropertyChanged("Name");
+                }
+            }
+        }
+
+        private string continent;
+        public string Continent
+        {
+            get
+            {
+                return continent;
+            }
+            set
+            {
+                if (continent != value)
+                {
+                    continent = value;
+                    RaisePropertyChanged("Continent");
                 }
             }
         }

@@ -72,11 +72,15 @@ namespace LoginModule.ViewModels
 
 
                             // get
-                            var location = RepositoryService.LocationRepository.GetLocation(2);
+                            var location = RepositoryService.LocationRepository.Get(2);
                             //var locations = RepositoryService.LocationRepository.GetLocations();
                             //MessageBox.Show(locations.Count.ToString());
                             MessageBox.Show(location.Name);
-                            
+
+                            location.Name = "test c# " + DateTime.Now.ToString("R");
+
+                            RepositoryService.LocationRepository.Put(location);
+
                             // post
                             // var newLoc = UnityContainer.Resolve<ILocation>();
                             // newLoc.Name = "Test von c# " + DateTime.Now.ToString("R");
