@@ -93,6 +93,8 @@ namespace LoginModule.ViewModels
                             // get
                             //var locations2 = RepositoryService.LocationRepository.GetLocations();
                             //MessageBox.Show(locations2.Count.ToString());
+
+                            EventAggregator.GetEvent<UserLoggedInEvent>().Publish("");
                         });
                 }
 

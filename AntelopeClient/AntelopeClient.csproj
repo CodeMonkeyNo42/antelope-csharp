@@ -129,6 +129,18 @@
   <ItemGroup>
     <Resource Include="Resources\antelope-cropped-gimp-small.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
+      <Project>{684312f6-018a-4a7b-a900-da0d99e2dfb6}</Project>
+      <Name>Interfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\antelope_gone_serious.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\antelope_logo_with_font.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

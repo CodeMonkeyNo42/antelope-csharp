@@ -2,37 +2,33 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
              >
     <UserControl.Resources>
         <ResourceDictionary>
             <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid>
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="500"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Label Margin="5" Content="Login" Foreground="White" FontFamily="Aller" FontSize="24"/>
-            <TextBox Margin="5" Grid.Column="1" Text="{Binding Login}" SelectionBrush="#FFEE7C15" Foreground="White" Background="#FF41454C" BorderBrush="{x:Null}" FontFamily="Aller" FontSize="24"/>
-        </Grid>
-        <Grid Grid.Column="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Label Margin="5" Content="Password" Foreground="White" FontFamily="Aller" FontSize="24"/>
-            <PasswordBox Margin="5" Name="txtPassword"  Grid.Column="1" Password="demo" SelectionBrush="#FFEE7C15" Foreground="White" Background="#FF41454C" BorderBrush="{x:Null}" FontFamily="Aller" FontSize="24"/>
-        </Grid>
-        <Grid Grid.Column="2">
-            <Button Margin="5"  Content="Connect" Command="{Binding ConnectCommand}" CommandParameter="{Binding ElementName=txtPassword}" FontFamily="Aller" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="24" />
-        </Grid>
+        <Label Margin="25" Grid.Row="0" Grid.ColumnSpan="2" Content="Sign in to antelope" Foreground="White" Background="Transparent" FontFamily="Exo 2.0" FontSize="42" HorizontalContentAlignment="Center" />
+        
+        <Label Grid.Row="1" Margin="5" Content="Login" Foreground="White" FontFamily="Aller" FontSize="24"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding Login}" SelectionBrush="#FFEE7C15" Foreground="White" Background="#FF41454C" BorderBrush="{x:Null}" FontFamily="Aller" FontSize="24" VerticalAlignment="Center"/>
+        
+        <Label Grid.Row="2" Margin="5" Content="Password" Foreground="White" FontFamily="Aller" FontSize="24"/>
+        <PasswordBox Grid.Row="2" Grid.Column="1" Margin="5" Name="txtPassword" Password="demo" SelectionBrush="#FFEE7C15" Foreground="White" Background="#FF41454C" BorderBrush="{x:Null}" FontFamily="Aller" FontSize="24" VerticalAlignment="Center"/>
+        
+        <Button Grid.Row="3" Margin="9" Grid.ColumnSpan="2"  Content="Connect" Command="{Binding ConnectCommand}" CommandParameter="{Binding ElementName=txtPassword}" FontFamily="Aller" FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        
     </Grid>
 </UserControl>

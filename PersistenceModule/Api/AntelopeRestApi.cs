@@ -10,12 +10,14 @@ using Interfaces.Events;
 using Interfaces.PersisenceModule.Datamodule;
 using RestSharp.Deserializers;
 using System.Collections.ObjectModel;
+using System.Net;
 
 namespace PersistenceModule.Api
 {
     class AntelopeRestApi
     {
-        const string BaseUrl = @"https://antelope.circinus.uberspace.de/";
+        //const string BaseUrl = @"https://antelope.circinus.uberspace.de/";
+        const string BaseUrl = @"https://antelope:8443/"; // ip für antelope in c:\windows\system32\drivers\etc\hosts konfiguriert
 
         string Login { get; set; }
         string Password { get; set; }
@@ -26,6 +28,9 @@ namespace PersistenceModule.Api
             EventAggregator = eventAggregator;
 
             EventAggregator.GetEvent<LoginAndPasswordChangedEvent>().Subscribe(OnLoginAndPasswordChanged);
+
+            // to ignore errors from selfcertified servers 
+            ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
         }
 
         private void OnLoginAndPasswordChanged(Tuple<string,string> loginAndPassword)

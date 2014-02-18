@@ -1,5 +1,6 @@
 ﻿using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.UnityExtensions;
+using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace AntelopeClient
 
         protected override System.Windows.DependencyObject CreateShell()
         {
-            return new MainWindow();
+            return new MainWindow(Container as IUnityContainer);
         }
 
         protected override void InitializeShell()

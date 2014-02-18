@@ -65,6 +65,8 @@
   <ItemGroup>
     <Compile Include="Events\LoginAndPasswordChangedEvent.cs" />
     <Compile Include="Events\RefreshViewsEvent.cs" />
+    <Compile Include="Events\UserLoggedInEvent.cs" />
+    <Compile Include="Events\UserLoggedOutEvent.cs" />
     <Compile Include="PersisenceModule\Datamodule\ILocation.cs" />
     <Compile Include="PersisenceModule\Repositories\ILocationRepository.cs" />
     <Compile Include="PersisenceModule\Services\IRepositoryService.cs" />

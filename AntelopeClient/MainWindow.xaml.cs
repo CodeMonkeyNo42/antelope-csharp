@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Interfaces.Events;
+using Microsoft.Practices.Prism.Events;
+using Microsoft.Practices.Unity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,10 +23,22 @@ namespace AntelopeClient
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(IUnityContainer unityContainer)
         {
             InitializeComponent();
             // x:Static AntelopeClient.Properties.Resources.antelope_cropped_gimp
+
+            IEventAggregator eventAggregator = unityContainer.Resolve<IEventAggregator>();
+
+            eventAggregator.GetEvent<UserLoggedInEvent>().Subscribe(OnUserLoggedIn);
+
+        }
+
+        private void OnUserLoggedIn(object o)
+        {
+            icon.Visibility = System.Windows.Visibility.Visible;
+            tabcontrol.Visibility = System.Windows.Visibility.Visible;
+            logincontrol.Visibility = System.Windows.Visibility.Collapsed;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -86,7 +101,7 @@ namespace AntelopeClient
             else
             {
                 this.WindowState = WindowState.Maximized;
-                MaxButton.Content = "is MAX";
+                MaxButton.Content = "UNMAX";
             }
 
         }
