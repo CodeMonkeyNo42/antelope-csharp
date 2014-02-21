@@ -66,8 +66,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Datamodules\Championship.cs" />
     <Compile Include="Data\Datamodules\Location.cs" />
     <Compile Include="Data\Datamodules\Nation.cs" />
+    <Compile Include="Data\Repositories\ChampionshipRepository.cs" />
     <Compile Include="Data\Repositories\LocationRepository.cs" />
     <Compile Include="Data\Repositories\NationRepository.cs" />
     <Compile Include="Data\Repositories\Repository.cs" />

@@ -57,7 +57,7 @@ namespace PersistenceModule.Data.Repositories
                     }
                     break;
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
-                    // delete new items
+                    // delete items
                     throw new NotSupportedException(e.Action.ToString());
                     break;
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Replace:

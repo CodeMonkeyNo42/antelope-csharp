@@ -67,9 +67,11 @@
     <Compile Include="Events\RefreshViewsEvent.cs" />
     <Compile Include="Events\UserLoggedInEvent.cs" />
     <Compile Include="Events\UserLoggedOutEvent.cs" />
+    <Compile Include="PersisenceModule\Datamodule\IChampionship.cs" />
     <Compile Include="PersisenceModule\Datamodule\IDatamodul.cs" />
     <Compile Include="PersisenceModule\Datamodule\ILocation.cs" />
     <Compile Include="PersisenceModule\Datamodule\INation.cs" />
+    <Compile Include="PersisenceModule\Repositories\IChampionshipRepository.cs" />
     <Compile Include="PersisenceModule\Repositories\ILocationRepository.cs" />
     <Compile Include="PersisenceModule\Repositories\INationRepository.cs" />
     <Compile Include="PersisenceModule\Repositories\IRepository.cs" />

@@ -63,40 +63,24 @@ namespace LoginModule.ViewModels
 
                             EventAggregator.GetEvent<LoginAndPasswordChangedEvent>().Publish(new Tuple<string, string>(Login, password));
                             EventAggregator.GetEvent<RefreshViewsEvent>().Publish("");
-                            // debug
-                            //MessageBox.Show(password);
-
-                            // get ok
-                            // post ok 
-                            // put nok
 
 
-                            // get
-                            var location = RepositoryService.LocationRepository.Get(2);
-                            //var locations = RepositoryService.LocationRepository.GetLocations();
-                            //MessageBox.Show(locations.Count.ToString());
-                            MessageBox.Show(location.Name);
+                            // location
+                            var locations = RepositoryService.LocationRepository.GetCollection();
+                            var alocation = locations[0];
 
-                            location.Name = "test c# " + DateTime.Now.ToString("R");
+                            alocation.Name = "c# " + DateTime.Now.ToString("R");
 
-                            RepositoryService.LocationRepository.Put(location);
+                            locations[0] = alocation;
+                            
 
-                            // post
-                            // var newLoc = UnityContainer.Resolve<ILocation>();
-                            // newLoc.Name = "Test von c# " + DateTime.Now.ToString("R");
-                            //var insertedLoc = RepositoryService.LocationRepository.PostLocation(newLoc);
-                            //MessageBox.Show(insertedLoc.Id.ToString());
+                            // championship
+                            var championships = RepositoryService.ChampionshipRepository.GetCollection();
 
-                            // put
-                            //var locations = RepositoryService.LocationRepository.GetLocations2();
-                            //var location5 = locations.FirstOrDefault((i) => i.Id == 5);
-                            //location5.Name += " changed";
+                            var one = championships[0];
+                            one.Name = " c# " + DateTime.Now.ToString("R");
 
-                            //MessageBox.Show(location5.Name);
-
-                            // get
-                            //var locations2 = RepositoryService.LocationRepository.GetLocations();
-                            //MessageBox.Show(locations2.Count.ToString());
+                            championships[0] = one;
 
                             EventAggregator.GetEvent<UserLoggedInEvent>().Publish("");
                         });

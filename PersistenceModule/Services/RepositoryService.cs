@@ -31,5 +31,31 @@ namespace PersistenceModule.Services
                 return locationRepository;
             }
         }
+
+        private INationRepository nationRepository;
+        public INationRepository NationRepository
+        {
+            get
+            {
+                if (nationRepository == null)
+                {
+                    nationRepository = UnityContainer.Resolve<INationRepository>();
+                }
+                return nationRepository;
+            }
+        }
+
+        private IChampionshipRepository championshipRepository;
+        public IChampionshipRepository ChampionshipRepository
+        {
+            get
+            {
+                if (championshipRepository == null)
+                {
+                    championshipRepository = UnityContainer.Resolve<IChampionshipRepository>();
+                }
+                return championshipRepository;
+            }
+        }
     }
 }

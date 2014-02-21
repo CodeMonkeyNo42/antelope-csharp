@@ -47,6 +47,13 @@ namespace PersistenceModule.ModuleDefinition
 
             UnityContainer.RegisterType<ILocation, Location>();
             UnityContainer.RegisterType<ILocationRepository, LocationRepository>();
+
+            UnityContainer.RegisterType<INation, Nation>();
+            UnityContainer.RegisterType<INationRepository, NationRepository>();
+
+            UnityContainer.RegisterType<IChampionship, Championship>();
+            UnityContainer.RegisterType<IChampionshipRepository, ChampionshipRepository>();
+
             UnityContainer.RegisterType<IRepositoryService, RepositoryService>();
         }
 
