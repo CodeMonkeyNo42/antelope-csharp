@@ -11,8 +11,5 @@ namespace Interfaces.PersisenceModule.Datamodule
         string Name { get; set; }
         DateTime StartsAt { get; set; }
         DateTime EndsAt { get; set; }
-        DateTime CreatedAt { get; set; }
-        DateTime UpdatedAt { get; set; }
-        string Url { get; set; }
     }
 }

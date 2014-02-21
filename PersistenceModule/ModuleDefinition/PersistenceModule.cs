@@ -54,6 +54,9 @@ namespace PersistenceModule.ModuleDefinition
             UnityContainer.RegisterType<IChampionship, Championship>();
             UnityContainer.RegisterType<IChampionshipRepository, ChampionshipRepository>();
 
+            UnityContainer.RegisterType<ITeam, Team>();
+            UnityContainer.RegisterType<ITeamRepository, TeamRepository>();
+
             UnityContainer.RegisterType<IRepositoryService, RepositoryService>();
         }
 

@@ -10,8 +10,5 @@ namespace Interfaces.PersisenceModule.Datamodule
     {
         string Name { get; set; }
         string Continent { get; set; }
-        DateTime CreatedAt { get; set; }
-        DateTime UpdatedAt { get; set; }
-        string Url { get; set; }
     }
 }

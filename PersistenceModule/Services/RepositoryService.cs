@@ -57,5 +57,18 @@ namespace PersistenceModule.Services
                 return championshipRepository;
             }
         }
+
+        private ITeamRepository teamRepository;
+        public ITeamRepository TeamRepository
+        {
+            get
+            {
+                if (teamRepository == null)
+                {
+                    teamRepository = UnityContainer.Resolve<ITeamRepository>();
+                }
+                return teamRepository;
+            }
+        }
     }
 }

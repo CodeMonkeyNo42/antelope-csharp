@@ -12,5 +12,6 @@ namespace Interfaces.PersisenceModule.Services
         ILocationRepository LocationRepository { get; }
         INationRepository NationRepository { get; }
         IChampionshipRepository ChampionshipRepository { get; }
+        ITeamRepository TeamRepository { get; }
     }
 }
