@@ -69,6 +69,7 @@
   <ItemGroup>
     <Compile Include="ModuleDefinition\NationModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\NationModuleTabItemUserControlViewModel.cs" />
     <Compile Include="Views\NationModuleTabItemUserControl.xaml.cs">
       <DependentUpon>NationModuleTabItemUserControl.xaml</DependentUpon>
     </Compile>
@@ -90,7 +91,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
-    <Folder Include="ViewModels\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

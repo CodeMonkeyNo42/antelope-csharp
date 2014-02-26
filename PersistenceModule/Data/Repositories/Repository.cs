@@ -23,22 +23,27 @@ namespace PersistenceModule.Data.Repositories
 
         public InterfaceDatamoduleType Get(int id)
         {
-            return AntelopeRestApi.Get<DatamoduleType>(id);
+            var datamodul = AntelopeRestApi.Get<DatamoduleType>(id);
+            SetComputedProperties(datamodul);
+            return datamodul;
         }
 
-        public InterfaceDatamoduleType Post(InterfaceDatamoduleType location)
+        public InterfaceDatamoduleType Post(InterfaceDatamoduleType datamodul)
         {
-            return AntelopeRestApi.Post<DatamoduleType>(location as DatamoduleType);
+            return AntelopeRestApi.Post<DatamoduleType>(datamodul as DatamoduleType);
         }
 
-        public InterfaceDatamoduleType Put(InterfaceDatamoduleType location)
+        public InterfaceDatamoduleType Put(InterfaceDatamoduleType datamodul)
         {
-            return AntelopeRestApi.Put<DatamoduleType>(location as DatamoduleType);
+            return AntelopeRestApi.Put<DatamoduleType>(datamodul as DatamoduleType);
         }
 
         public ObservableCollection<InterfaceDatamoduleType> GetCollection()
         {
             var observableCollection = new ObservableCollection<InterfaceDatamoduleType>(AntelopeRestApi.GetCollection<DatamoduleType>());
+
+            foreach (var item in observableCollection)
+                SetComputedProperties(item);
 
             observableCollection.CollectionChanged += OnCollectionChanged;
 
@@ -70,6 +75,10 @@ namespace PersistenceModule.Data.Repositories
                 default:
                     throw new NotSupportedException(e.Action.ToString() + " Action is not supported");
             }
+        }
+
+        protected virtual void SetComputedProperties(InterfaceDatamoduleType datamodul)
+        {
         }
     }
 }

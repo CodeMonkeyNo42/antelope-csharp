@@ -3,14 +3,17 @@ using Microsoft.Practices.Prism.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace PersistenceModule.Data.Datamodules
 {
+    [DataContract]
     class Team : NotificationObject, IDatamodul, ITeam
     {
         private int id;
+        [DataMember(Name = "id")]
         public int Id
         {
             get
@@ -28,6 +31,7 @@ namespace PersistenceModule.Data.Datamodules
         }
 
         public int championship_id;
+        [DataMember(Name = "championship_id")]
         public int ChampionshipId 
         {
             get
@@ -45,6 +49,7 @@ namespace PersistenceModule.Data.Datamodules
         }
 
         private int group_id;
+        [DataMember(Name = "group_id")]
         public int GroupId 
         {
             get

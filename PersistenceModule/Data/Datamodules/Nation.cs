@@ -3,15 +3,18 @@ using Microsoft.Practices.Prism.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace PersistenceModule.Data.Datamodules
 {
+    [DataContract]
     class Nation : NotificationObject, IDatamodul, INation
     {
 
         private int id;
+        [DataMember(Name = "id")]
         public int Id
         {
             get
@@ -29,6 +32,7 @@ namespace PersistenceModule.Data.Datamodules
         }
 
         private string name;
+        [DataMember(Name = "name")]
         public string Name
         {
             get
@@ -46,6 +50,7 @@ namespace PersistenceModule.Data.Datamodules
         }
 
         private string continent;
+        [DataMember(Name = "continent")]
         public string Continent
         {
             get
@@ -125,7 +130,7 @@ namespace PersistenceModule.Data.Datamodules
 
         public string GetRequestUrlPart()
         {
-            return "locations";
+            return "nations";
         }
     }
 }

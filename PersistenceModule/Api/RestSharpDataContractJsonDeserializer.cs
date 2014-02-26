@@ -2,6 +2,7 @@
 using RestSharp.Deserializers;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace PersistenceModule.Api
 
         public T Deserialize<T>(IRestResponse response)
         {
+            Debug.WriteLine(response.Content);
             using (MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(response.Content)))
             {
                 DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(T));

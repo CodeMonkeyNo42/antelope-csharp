@@ -37,15 +37,17 @@ namespace ChampionshipModule.ViewModels
         {
             get
             {
+                if (championships == null)
+                {
+                    championships = RepositoryService.ChampionshipRepository.GetCollection();
+                }
                 return championships;
             }
             set
             {
-                if (championships == null)
-                {
-                    championships = RepositoryService.ChampionshipRepository.GetCollection();
-                    RaisePropertyChanged("Championships");
-                }
+                championships = value;
+                RaisePropertyChanged("Championships");
+                
             }
         }
 
@@ -54,15 +56,16 @@ namespace ChampionshipModule.ViewModels
         {
             get
             {
+                if (nations == null)
+                {
+                    nations = RepositoryService.NationRepository.GetCollection();
+                }
                 return nations;
             }
             set
             {
-                if (nations == null)
-                {
-                    nations = RepositoryService.NationRepository.GetCollection();
-                    RaisePropertyChanged("Nations");
-                }
+                nations = value;
+                RaisePropertyChanged("Nations");
             }
         }
 
@@ -86,9 +89,7 @@ namespace ChampionshipModule.ViewModels
                             newChampionship.StartsAt = tabitem.startsatdatetimepicker.SelectedDate.HasValue ? tabitem.startsatdatetimepicker.SelectedDate.Value : DateTime.Now;
                             newChampionship.EndsAt = tabitem.endsatdatetimepicker.SelectedDate.HasValue ? tabitem.startsatdatetimepicker.SelectedDate.Value : DateTime.Now;
                             newChampionship.NationId = selectedNation.Id;
-
-                            //var displayName = selectedNation.Name + " " + newChampionship.StartsAt.Year.ToString();
-                            
+                            newChampionship.Name = selectedNation.Name + " " + newChampionship.StartsAt.Year.ToString();
 
                             RepositoryService.ChampionshipRepository.Post(newChampionship);
 

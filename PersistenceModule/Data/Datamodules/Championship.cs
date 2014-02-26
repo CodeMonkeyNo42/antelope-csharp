@@ -1,5 +1,6 @@
 ﻿using Interfaces.PersisenceModule.Datamodule;
 using Microsoft.Practices.Prism.ViewModel;
+using PersistenceModule.Services;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -29,6 +30,19 @@ namespace PersistenceModule.Data.Datamodules
                     id = value;
                     RaisePropertyChanged("Id");
                 }
+            }
+        }
+
+        private string name;
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                name = value;
             }
         }
 
@@ -103,6 +117,14 @@ namespace PersistenceModule.Data.Datamodules
             set
             {
                 EndsAt = DateTime.Parse(value);
+            }
+        }
+
+        public string Duration
+        {
+            get
+            {
+                return StartsAt.ToString("dd.MM.yyyy") + " - " + EndsAt.ToString("dd.MM.yyyy");
             }
         }
 

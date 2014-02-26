@@ -66,27 +66,27 @@ namespace LoginModule.ViewModels
 
 
                             // location
-                            var locations = RepositoryService.LocationRepository.GetCollection();
-                            var alocation = locations[0];
+                            //var locations = RepositoryService.LocationRepository.GetCollection();
+                            //var alocation = locations[0];
 
-                            alocation.Name = "c# " + DateTime.Now.ToString("R");
+                            //alocation.Name = "c# " + DateTime.Now.ToString("R");
 
-                            locations[0] = alocation;
+                            //locations[0] = alocation;
                             
 
                             // championship
-                            var championships = RepositoryService.ChampionshipRepository.GetCollection();
+                            //var championships = RepositoryService.ChampionshipRepository.GetCollection();
 
-                            var one = championships[0];
-                            one.StartsAt = DateTime.Now;
+                            //var one = championships[0];
+                            //one.StartsAt = DateTime.Now;
 
-                            championships[0] = one;
+                            //championships[0] = one;
 
 
                             // post test
-                            var newLoc = UnityContainer.Resolve<ILocation>();
-                            newLoc.Name = "test " + DateTime.Now.ToString("R");
-                            RepositoryService.LocationRepository.Post(newLoc);
+                            //var newLoc = UnityContainer.Resolve<ILocation>();
+                            //newLoc.Name = "test " + DateTime.Now.ToString("R");
+                            //RepositoryService.LocationRepository.Post(newLoc);
 
                             EventAggregator.GetEvent<RefreshViewsEvent>().Publish("");
                             EventAggregator.GetEvent<UserLoggedInEvent>().Publish("");

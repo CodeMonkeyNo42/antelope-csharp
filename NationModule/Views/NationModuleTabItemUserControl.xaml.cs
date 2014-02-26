@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NationModule.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,11 @@ namespace NationModule.Views
     /// </summary>
     public partial class NationModuleTabItemUserControl : TabItem
     {
-        public NationModuleTabItemUserControl()
+        public NationModuleTabItemUserControl(NationModuleTabItemUserControlViewModel nationModuleTabItemUserControlViewModel)
         {
             InitializeComponent();
+
+            Loaded += (o, e) => DataContext = nationModuleTabItemUserControlViewModel;
         }
 
         private void TabItem_MouseEnter(object sender, MouseEventArgs e)

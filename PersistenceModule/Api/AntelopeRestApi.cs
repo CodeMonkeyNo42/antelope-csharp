@@ -16,9 +16,9 @@ namespace PersistenceModule.Api
 {
     class AntelopeRestApi
     {
-        //const string BaseUrl = @"https://antelope.circinus.uberspace.de/";
+        const string BaseUrl = @"https://antelope.circinus.uberspace.de/";
         //const string BaseUrl = @"https://antelope:8443/"; // ip für antelope in c:\windows\system32\drivers\etc\hosts konfiguriert
-        const string BaseUrl = @"http://antelope:3000/"; // ip für antelope in c:\windows\system32\drivers\etc\hosts konfiguriert
+        //const string BaseUrl = @"http://antelope:3000/"; // ip für antelope in c:\windows\system32\drivers\etc\hosts konfiguriert
         //const string BaseUrl = @"http://antelope2:3000/"; // ip für antelope2 in c:\windows\system32\drivers\etc\hosts konfiguriert
 
         string Login { get; set; }

@@ -13,7 +13,7 @@
         AllowsTransparency="True"
         ResizeMode="CanResizeWithGrip"
         BorderThickness="1" 
-        BorderBrush="Black" Loaded="Window_Loaded">
+        BorderBrush="Black" Loaded="Window_Loaded" Icon="Resources/antelope-logo.png">
     <DockPanel x:Name="RootWindow">
         <DockPanel x:Name="TitleBar" DockPanel.Dock="Top" MouseDown="TitleBar_MouseDown">
             <DockPanel.Resources>

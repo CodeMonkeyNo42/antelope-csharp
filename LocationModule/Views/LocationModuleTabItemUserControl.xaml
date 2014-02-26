@@ -8,6 +8,7 @@
          BorderBrush="{x:Null}" 
          Foreground="White" 
          Background="#FF272627" 
+         Name="tabitemlocation"
          Style="{DynamicResource MyTabItem}" MouseEnter="TabItem_MouseEnter" MouseLeave="TabItem_MouseLeave" FontSize="24" BorderThickness="0"
           >
     <TabItem.Resources>
@@ -45,10 +46,22 @@
     <Grid Background="White" >
         <Grid.RowDefinitions>
             <RowDefinition Height="200"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Background="#EE7C15" Text=" " />
-        <ListBox Grid.Row="1" ItemsSource="{Binding Locations}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" >
+        <Grid Grid.Row="0" Background="#EE7C15" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="Locations" Foreground="White" VerticalAlignment="Bottom" Margin="50,0,0,0" />
+            <Button Grid.Column="1" Name="addlocationbutton" VerticalAlignment="Bottom" Content="Add" Command="{Binding AddLocationCommand}" CommandParameter="{Binding ElementName=tabitemlocation}" x:FieldModifier="public" FontFamily="Aller" />
+        </Grid>
+        <ListBox Name="listboxlocations" x:FieldModifier="public" Grid.Row="1" ItemsSource="{Binding Locations}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" >
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel IsItemsHost="True" />
@@ -82,6 +95,22 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <Grid Grid.Row="2" Visibility="Collapsed" Name="gridnewlocation" x:FieldModifier="public" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Name" FontFamily="Aller" Foreground="Black" />
+            <TextBox Grid.Column="1" Name="locationtextbox" Text="{Binding Name}" FontFamily="Aller" Foreground="Black"  />
+
+            <Button Grid.Row="1" Name="addnewlocationok" Content="OK" FontFamily="Aller" Foreground="Black" Command="{Binding AddLocationOkCommand}" CommandParameter="{Binding ElementName=tabitemlocation}" />
+            <Button Grid.Row="1" Grid.Column="2" Name="addnewlocationcancel" Content="Cancel" Foreground="Black" FontFamily="Aller" Command="{Binding AddLocationCancelCommand}" CommandParameter="{Binding ElementName=tabitemlocation}" />
+        </Grid>
     </Grid>
 </TabItem>
 
