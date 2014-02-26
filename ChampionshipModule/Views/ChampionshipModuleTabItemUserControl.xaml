@@ -3,9 +3,11 @@
          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
-         Header="Championship" FontFamily="Aller" BorderBrush="{x:Null}" Foreground="White" Background="#FF272627" Style="{DynamicResource MyTabItem}" MouseEnter="TabItem_MouseEnter" MouseLeave="TabItem_MouseLeave" FontSize="24" >
+         Header="Championship" Name="tabitemchampionship" IsSelected="True" FontFamily="Aller" BorderBrush="{x:Null}" Foreground="White" Background="#FF272627" Style="{DynamicResource MyTabItem}" MouseEnter="TabItem_MouseEnter" MouseLeave="TabItem_MouseLeave" FontSize="24" >
     <TabItem.Resources>
         <ResourceDictionary>
+            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
+            <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent" />
             <Style x:Key="MyTabItem" TargetType="{x:Type TabItem}">
                 <Setter Property="Template">
                     <Setter.Value>
@@ -23,8 +25,76 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <Style TargetType="{x:Type DataGridRow}">
+                <Style.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
+                    <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent" />
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black" />
+                    <SolidColorBrush x:Key="{x:Static SystemColors.ControlTextBrushKey}" Color="Black" />
+                </Style.Resources>
+            </Style>
         </ResourceDictionary>
     </TabItem.Resources>
-    <Grid Background="White" />
+    <Grid Background="White" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="#EE7C15" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="Championships" Foreground="White" VerticalAlignment="Bottom" Margin="50,0,0,0" />
+            <Button Grid.Column="1" Name="addchampionshipbutton" VerticalAlignment="Bottom" Content="Add" Command="{Binding AddChampionshipCommand}" CommandParameter="{Binding ElementName=tabitemchampionship}" x:FieldModifier="public" FontFamily="Aller" />
+        </Grid>
+        <DataGrid Name="datagridchampionships" x:FieldModifier="public" HeadersVisibility="None" SelectionMode="Single" SelectionUnit="FullRow" Grid.Row="1" ItemsSource="{Binding Championships}" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" GridLinesVisibility="None" AlternatingRowBackground="#FFD4D6D8" AlternationCount="1" BorderBrush="{x:Null}" Margin="50,0" >
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="championshipnamecolum" Binding="{Binding NationId}" Header="Name" Width="*" IsReadOnly="True" FontFamily="Aller" />
+                <DataGridTextColumn x:Name="championshipnstartatcolum" Binding="{Binding StartsAt, StringFormat='{}{0:dd.mm.yyyy}'}" Header="StartsAt" Width="*" IsReadOnly="True" FontFamily="Aller" >
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Style.Triggers>
+                        <Trigger Property="DataGridCell.IsSelected" Value="True">
+                            <Setter Property="Background" Value="#5FB632" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
+        </DataGrid>
+        <Grid Grid.Row="1" Visibility="Collapsed" Name="gridnewchampionship" x:FieldModifier="public" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            
+            <TextBlock Text="Organizer" FontFamily="Aller" Foreground="Black" />
+            <ComboBox Grid.Column="1" Name="nationscombobox" ItemsSource="{Binding Nations}" DisplayMemberPath="Name" IsSynchronizedWithCurrentItem="True" FontFamily="Aller" Foreground="Black"  />
+
+            <TextBlock Grid.Row="1" Text="StartsAt" FontFamily="Aller" Foreground="Black" />
+            <DatePicker Name="startsatdatetimepicker" Grid.Row="1" Grid.Column="1" FontFamily="Aller" Foreground="Black" />
+
+            <TextBlock Grid.Row="2" Text="EndsAt" FontFamily="Aller" Foreground="Black" />
+            <DatePicker Name="endsatdatetimepicker" Grid.Row="2" Grid.Column="2" FontFamily="Aller" Foreground="Black" />
+
+            <Button Grid.Row="3" Name="addnewchampionshipok" Content="OK" FontFamily="Aller" Foreground="Black" Command="{Binding AddChampionshipOkCommand}" CommandParameter="{Binding ElementName=tabitemchampionship}" />
+            <Button Grid.Row="3" Grid.Column="2" Name="addnewchampionshipcancel" Content="Cancel" Foreground="Black" FontFamily="Aller" Command="{Binding AddChampionshipCancelCommand}" CommandParameter="{Binding ElementName=tabitemchampionship}" />
+        </Grid>
+        
+    </Grid>
 </TabItem>
 

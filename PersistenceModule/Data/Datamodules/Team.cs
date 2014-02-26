@@ -124,7 +124,14 @@ namespace PersistenceModule.Data.Datamodules
 
         public string GetRequestUrlPart()
         {
-            return "championships/" + ChampionshipId + "/teams";
+            if (ChampionshipId == 0)
+            {
+                return "championships/{ChampionshipId}/teams";
+            }
+            else
+            {
+                return "championships/" + ChampionshipId + "/teams";
+            }            
         }
     }
 }

@@ -16,8 +16,9 @@ namespace PersistenceModule.Api
 {
     class AntelopeRestApi
     {
-        const string BaseUrl = @"https://antelope.circinus.uberspace.de/";
+        //const string BaseUrl = @"https://antelope.circinus.uberspace.de/";
         //const string BaseUrl = @"https://antelope:8443/"; // ip für antelope in c:\windows\system32\drivers\etc\hosts konfiguriert
+        const string BaseUrl = @"http://antelope:3000/"; // ip für antelope in c:\windows\system32\drivers\etc\hosts konfiguriert
         //const string BaseUrl = @"http://antelope2:3000/"; // ip für antelope2 in c:\windows\system32\drivers\etc\hosts konfiguriert
 
         string Login { get; set; }
@@ -47,6 +48,9 @@ namespace PersistenceModule.Api
             client.BaseUrl = BaseUrl;
             client.Authenticator = new HttpBasicAuthenticator(Login, Password);
 
+            // we use our own deserializer
+            client.AddHandler("application/json", new RestSharpDataContractJsonDeserializer());
+
             // used on every request
             request.AddHeader("User-Agent", "antelope-csharp/1.0 (alpha Version)");
             request.AddHeader("Content-Type", "application/json");
@@ -63,15 +67,38 @@ namespace PersistenceModule.Api
                 throw exe;
             }
 
+            var statusCode = (int)response.StatusCode;
+            if(statusCode < 200 || statusCode > 399)
+            {
+                const string message = "Error HTTP.  Check data for more info.";
+                var exe = new ApplicationException(message);
+                exe.Data["StatusCode"] = (int)response.StatusCode;
+                exe.Data["StatusCodeDescription"] = response.StatusDescription;
+                exe.Data["Content"] = response.Content;
+                throw exe;
+            }
+
             return response.Data;
         }
 
-        public DatamoduleType Get<DatamoduleType>(int id) where DatamoduleType : IDatamodul, new()
+        public DatamoduleType Get<DatamoduleType>(int id, int championshipId = 0, int matchId = 0) where DatamoduleType : IDatamodul, new()
         {
             var request = new RestRequest();
             var datamodule = new DatamoduleType();
 
-            request.Resource = "/" + datamodule.GetRequestUrlPart() + "/" + id.ToString();
+            var requestUrlPart = datamodule.GetRequestUrlPart();
+
+            if (championshipId != 0)
+            {
+                requestUrlPart = requestUrlPart.Replace("{ChampionshipId}", championshipId.ToString());
+            }
+
+            if (matchId != 0)
+            {
+                requestUrlPart = requestUrlPart.Replace("{MatchId}", matchId.ToString());
+            }
+
+            request.Resource = "/" + requestUrlPart + "/" + id.ToString();
 
             return Execute<DatamoduleType>(request);
         }
@@ -81,10 +108,13 @@ namespace PersistenceModule.Api
             var request = new RestRequest();
 
             request.Method = Method.POST;
+            //request.JsonSerializer.RootElement = typeof(DatamoduleType).Name;
+            request.JsonSerializer = new RestSharpDataContractJsonSerializer();
             request.Resource = "/" + datamodul.GetRequestUrlPart();
 
             request.RequestFormat = DataFormat.Json;
-            request.AddBody(datamodul.GetPostObject());
+            //request.AddBody(datamodul.GetPostObject());
+            request.AddBody(datamodul);
 
             return Execute<DatamoduleType>(request);
         }
@@ -97,7 +127,8 @@ namespace PersistenceModule.Api
             request.Resource = "/" + datamodul.GetRequestUrlPart() + "/" + datamodul.Id;
 
             request.RequestFormat = DataFormat.Json;
-            request.AddBody(datamodul.GetPutObject());
+            // request.AddBody(datamodul.GetPutObject());
+            request.AddBody(datamodul);
 
             return Execute<DatamoduleType>(request);
         }

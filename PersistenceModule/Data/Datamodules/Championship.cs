@@ -2,15 +2,20 @@
 using Microsoft.Practices.Prism.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 
 namespace PersistenceModule.Data.Datamodules
 {
+    [DataContract]
     class Championship : NotificationObject, IDatamodul, IChampionship
     {
         private int id;
+        [DataMember(Name = "id")]
         public int Id
         {
             get
@@ -27,20 +32,17 @@ namespace PersistenceModule.Data.Datamodules
             }
         }
 
-        private string name;
-        public string Name
+        private int nationId;
+        [DataMember(Name = "organizer_id")]
+        public int NationId
         {
             get
             {
-                return name;
+                return nationId;
             }
             set
             {
-                if (name != value)
-                {
-                    name = value;
-                    RaisePropertyChanged("Name");
-                }
+                nationId = value;
             }
         }
 
@@ -61,6 +63,19 @@ namespace PersistenceModule.Data.Datamodules
             }
         }
 
+        [DataMember(Name = "starts_at")]
+        public string StartsAtString
+        {
+            get
+            {
+                return StartsAt.ToString("s", CultureInfo.InvariantCulture);
+            }
+            set
+            {
+                StartsAt = DateTime.Parse(value);
+            }
+        }
+
         private DateTime ends_at;
         public DateTime EndsAt
         {
@@ -75,6 +90,19 @@ namespace PersistenceModule.Data.Datamodules
                     ends_at = value;
                     RaisePropertyChanged("EndsAt");
                 }
+            }
+        }
+
+        [DataMember(Name = "ends_at")]
+        public string EndsAtString
+        {
+            get
+            {
+                return EndsAt.ToString("s");
+            }
+            set
+            {
+                EndsAt = DateTime.Parse(value);
             }
         }
 
@@ -131,12 +159,12 @@ namespace PersistenceModule.Data.Datamodules
 
         public object GetPostObject()
         {
-            return new { name = Name, starts_at = StartsAt, ends_at = EndsAt };
+            return new { organizer_id = NationId, starts_at = StartsAtString, ends_at = EndsAtString };
         }
 
         public object GetPutObject()
         {
-            return new { name = Name, starts_at = StartsAt, ends_at = EndsAt };
+            return new { organizer_id = NationId, starts_at = StartsAtString, ends_at = EndsAtString };
         }
 
         public string GetRequestUrlPart()

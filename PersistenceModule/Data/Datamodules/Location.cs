@@ -3,15 +3,19 @@ using Microsoft.Practices.Prism.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 
 namespace PersistenceModule.Data.Datamodules
 {
+    [DataContract]
     class Location : NotificationObject, IDatamodul, ILocation
     {
 
         private int id;
+        [DataMember(Name = "id")]
         public int Id
         {
             get
@@ -29,6 +33,7 @@ namespace PersistenceModule.Data.Datamodules
         }
 
         private string name;
+        [DataMember(Name = "name")]
         public string Name
         {
             get

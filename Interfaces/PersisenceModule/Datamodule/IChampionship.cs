@@ -8,7 +8,7 @@ namespace Interfaces.PersisenceModule.Datamodule
 {
     public interface IChampionship : IDatamodul
     {
-        string Name { get; set; }
+        int NationId { get; set; }
         DateTime StartsAt { get; set; }
         DateTime EndsAt { get; set; }
     }

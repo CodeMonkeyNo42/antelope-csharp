@@ -62,7 +62,7 @@ namespace LoginModule.ViewModels
                             var password = pwBox.Password;
 
                             EventAggregator.GetEvent<LoginAndPasswordChangedEvent>().Publish(new Tuple<string, string>(Login, password));
-                            EventAggregator.GetEvent<RefreshViewsEvent>().Publish("");
+                            
 
 
                             // location
@@ -78,10 +78,17 @@ namespace LoginModule.ViewModels
                             var championships = RepositoryService.ChampionshipRepository.GetCollection();
 
                             var one = championships[0];
-                            one.Name = " c# " + DateTime.Now.ToString("R");
+                            one.StartsAt = DateTime.Now;
 
                             championships[0] = one;
 
+
+                            // post test
+                            var newLoc = UnityContainer.Resolve<ILocation>();
+                            newLoc.Name = "test " + DateTime.Now.ToString("R");
+                            RepositoryService.LocationRepository.Post(newLoc);
+
+                            EventAggregator.GetEvent<RefreshViewsEvent>().Publish("");
                             EventAggregator.GetEvent<UserLoggedInEvent>().Publish("");
                         });
                 }
@@ -90,5 +97,8 @@ namespace LoginModule.ViewModels
             }
         }
 
+        
+
     }
+
 }

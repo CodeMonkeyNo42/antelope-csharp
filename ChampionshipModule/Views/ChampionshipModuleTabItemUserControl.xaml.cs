@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChampionshipModule.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,11 @@ namespace ChampionshipModule.Views
     /// </summary>
     public partial class ChampionshipModuleTabItemUserControl : TabItem
     {
-        public ChampionshipModuleTabItemUserControl()
+        public ChampionshipModuleTabItemUserControl(ChampionshipModuleTabItemUserControlViewModel championshipModuleTabItemUserControlViewModel)
         {
             InitializeComponent();
+
+            Loaded += (o, e) => DataContext = championshipModuleTabItemUserControlViewModel;
         }
 
         private void TabItem_MouseEnter(object sender, MouseEventArgs e)
