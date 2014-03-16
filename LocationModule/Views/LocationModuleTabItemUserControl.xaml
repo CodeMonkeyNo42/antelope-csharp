@@ -3,7 +3,7 @@
          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
-         Header="Location" 
+         Header="Locations" 
          FontFamily="Aller" 
          BorderBrush="{x:Null}" 
          Foreground="White" 
@@ -14,33 +14,6 @@
     <TabItem.Resources>
         <ResourceDictionary>
             <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
-            <Style x:Key="MyTabItem" TargetType="{x:Type TabItem}">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type TabItem}">
-                            <Grid Name="Panel">
-                                <Border BorderBrush="#FF41454C" BorderThickness="0,1" >
-                                <ContentPresenter x:Name="ContentSite"
-                                            VerticalAlignment="Center"
-                                            HorizontalAlignment="Center"
-                                            ContentSource="Header"
-                                            Margin="10,2"/>
-                                </Border>
-                            </Grid>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsSelected" Value="True">
-                                    <Setter Property="Foreground" Value="#EE7C15" />
-                                    <Setter Property="Background" Value="#272627" />
-                                </Trigger>
-                                <Trigger Property="IsSelected" Value="False">
-                                    <Setter Property="Foreground" Value="White" />
-                                    <Setter Property="Background" Value="#272627" />
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
         </ResourceDictionary>
     </TabItem.Resources>
     <Grid Background="White" >
@@ -59,7 +32,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <TextBlock Grid.Column="0" Grid.Row="0" Text="Locations" Foreground="White" VerticalAlignment="Bottom" Margin="50,0,0,0" />
-            <Button Grid.Column="1" Name="addlocationbutton" VerticalAlignment="Bottom" Content="Add" Command="{Binding AddLocationCommand}" CommandParameter="{Binding ElementName=tabitemlocation}" x:FieldModifier="public" FontFamily="Aller" />
+            <Button Grid.Column="1" Name="addlocationbutton" VerticalAlignment="Bottom" Content="+ Add" Command="{Binding AddLocationCommand}" CommandParameter="{Binding ElementName=tabitemlocation}" x:FieldModifier="public" FontFamily="Aller" Style="{DynamicResource MyGreenButton}" HorizontalAlignment="Center" />
         </Grid>
         <ListBox Name="listboxlocations" x:FieldModifier="public" Grid.Row="1" ItemsSource="{Binding Locations}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" >
             <ListBox.ItemsPanel>

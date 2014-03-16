@@ -4,11 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
              >
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
-        </ResourceDictionary>
-    </UserControl.Resources>
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -27,8 +22,8 @@
         
         <Label Grid.Row="2" Margin="5" Content="Password" Foreground="White" FontFamily="Aller" FontSize="24"/>
         <PasswordBox Grid.Row="2" Grid.Column="1" Margin="5" Name="txtPassword" Password="demo" SelectionBrush="#FFEE7C15" Foreground="White" Background="#FF41454C" BorderBrush="{x:Null}" FontFamily="Aller" FontSize="24" VerticalAlignment="Center"/>
-        
-        <Button Grid.Row="3" Margin="9" Grid.ColumnSpan="2"  Content="Connect" Command="{Binding ConnectCommand}" CommandParameter="{Binding ElementName=txtPassword}" FontFamily="Aller" FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+        <Button Grid.Row="3" Margin="9" Grid.ColumnSpan="2"  Content="Connect" Command="{Binding ConnectCommand}" CommandParameter="{Binding ElementName=txtPassword}" FontFamily="Aller" FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource MyButton}" />
         
     </Grid>
 </UserControl>

@@ -3,28 +3,11 @@
          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
-         Header="Championship" Name="tabitemchampionship" IsSelected="True" FontFamily="Aller" BorderBrush="{x:Null}" Foreground="White" Background="#FF272627" Style="{DynamicResource MyTabItem}" MouseEnter="TabItem_MouseEnter" MouseLeave="TabItem_MouseLeave" FontSize="24" >
+         Header="Championship" Name="tabitemchampionship" IsSelected="True" FontFamily="Aller" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource MyTabItem}" Background="#FF272627" MouseEnter="TabItem_MouseEnter" MouseLeave="TabItem_MouseLeave" FontSize="24" >
     <TabItem.Resources>
         <ResourceDictionary>
             <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
             <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent" />
-            <Style x:Key="MyTabItem" TargetType="{x:Type TabItem}">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type TabItem}">
-                            <Grid Name="Panel">
-                                <Border BorderBrush="#FF41454C" BorderThickness="0,1" >
-                                    <ContentPresenter x:Name="ContentSite"
-                                            VerticalAlignment="Center"
-                                            HorizontalAlignment="Center"
-                                            ContentSource="Header"
-                                            Margin="10,2"/>
-                                </Border>
-                            </Grid>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
             <Style TargetType="{x:Type DataGridRow}">
                 <Style.Resources>
                     <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
