@@ -9,6 +9,7 @@ using NationModule.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,8 +33,8 @@ namespace NationModule.ViewModels
         private IRepositoryService RepositoryService { get; set; }
         private IUnityContainer UnityContainer { get; set; }
 
-        private ObservableCollection<INation> nations;
-        public ObservableCollection<INation> Nations
+        private BindingList<INation> nations;
+        public BindingList<INation> Nations
         {
             get
             {

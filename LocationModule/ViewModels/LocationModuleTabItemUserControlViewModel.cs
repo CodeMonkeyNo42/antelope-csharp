@@ -9,6 +9,7 @@ using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,8 +33,8 @@ namespace LocationModule.ViewModels
         private IRepositoryService RepositoryService { get; set; }
         private IUnityContainer UnityContainer { get; set; }
 
-        private ObservableCollection<ILocation> locations;
-        public ObservableCollection<ILocation> Locations 
+        private BindingList<ILocation> locations;
+        public BindingList<ILocation> Locations 
         {
             get
             {

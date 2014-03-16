@@ -1,6 +1,7 @@
 ﻿using RestSharp.Serializers;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Json;
@@ -25,17 +26,21 @@ namespace PersistenceModule.Api
         public string Serialize(object obj)
         {
             //Create a stream to serialize the object to.
-            MemoryStream ms = new MemoryStream();
+            using (MemoryStream ms = new MemoryStream())
+            {
+                // Serializer the User object to the stream.
+                Type type = obj.GetType();
+                DataContractJsonSerializer ser = new DataContractJsonSerializer(type);
+                ser.WriteObject(ms, obj);
+                byte[] json = ms.ToArray();
 
-            // Serializer the User object to the stream.
-            Type type = obj.GetType();
-            DataContractJsonSerializer ser = new DataContractJsonSerializer(type);
-            ser.WriteObject(ms, obj);
-            byte[] json = ms.ToArray();
-            ms.Close();
+                string output = Encoding.UTF8.GetString(json, 0, json.Length);
+                output = "{ \"" + type.Name.ToLower() + "\" : " + output + "}";
 
-            string output = Encoding.UTF8.GetString(json, 0, json.Length);
-            return "{ \"" + type.Name.ToLower() + "\" : " + output + "}";
+                Debug.WriteLine("requestcontent: " + output);
+
+                return output;
+            }
         }
 
         ///

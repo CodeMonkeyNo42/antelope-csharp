@@ -39,7 +39,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="200"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="#EE7C15" >
             <Grid.ColumnDefinitions>
@@ -94,7 +95,10 @@
             <Button Grid.Row="3" Name="addnewchampionshipok" Content="OK" FontFamily="Aller" Foreground="Black" Command="{Binding AddChampionshipOkCommand}" CommandParameter="{Binding ElementName=tabitemchampionship}" />
             <Button Grid.Row="3" Grid.Column="2" Name="addnewchampionshipcancel" Content="Cancel" Foreground="Black" FontFamily="Aller" Command="{Binding AddChampionshipCancelCommand}" CommandParameter="{Binding ElementName=tabitemchampionship}" />
         </Grid>
-        
+        <StackPanel Grid.Row="2">
+            <DataGrid SelectionMode="Single" SelectionUnit="FullRow" ItemsSource="{Binding Championships}" IsSynchronizedWithCurrentItem="True" AlternatingRowBackground="#FFD4D6D8" AlternationCount="1" IsManipulationEnabled="True" />
+            <TextBlock Text="use enter to commit the changes"/>
+        </StackPanel>
     </Grid>
 </TabItem>
 

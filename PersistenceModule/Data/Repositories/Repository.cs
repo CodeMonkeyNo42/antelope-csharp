@@ -4,7 +4,9 @@ using PersistenceModule.Data.Datamodules;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,6 +17,7 @@ namespace PersistenceModule.Data.Repositories
         where DatamoduleType : class, IDatamodul, InterfaceDatamoduleType, new()
     {
         AntelopeRestApi AntelopeRestApi { get; set; }
+        //ConditionalWeakTable<int, BindingList<InterfaceDatamoduleType>> WeakreferenceList { get; set; }
 
         public Repository(AntelopeRestApi antelopeRestApi)
         {
@@ -38,43 +41,49 @@ namespace PersistenceModule.Data.Repositories
             return AntelopeRestApi.Put<DatamoduleType>(datamodul as DatamoduleType);
         }
 
-        public ObservableCollection<InterfaceDatamoduleType> GetCollection()
+        public BindingList<InterfaceDatamoduleType> GetCollection()
         {
-            var observableCollection = new ObservableCollection<InterfaceDatamoduleType>(AntelopeRestApi.GetCollection<DatamoduleType>());
+            var list = AntelopeRestApi.GetCollection<DatamoduleType>();
+            var bindingList = new BindingList<InterfaceDatamoduleType>( new List<InterfaceDatamoduleType>(list) );
 
-            foreach (var item in observableCollection)
+            foreach (var item in bindingList)
+            {
                 SetComputedProperties(item);
+                //item.PropertyChanged += OnPropertyChanged;
+            }
 
-            observableCollection.CollectionChanged += OnCollectionChanged;
+            bindingList.ListChanged += OnCollectionChanged;
+            bindingList.RaiseListChangedEvents = true;
 
-            return observableCollection;
+            return bindingList;
         }
 
-        void OnCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        void OnCollectionChanged(object sender, ListChangedEventArgs e)
         {
-            switch (e.Action)
+            var list = sender as BindingList<InterfaceDatamoduleType>;
+
+            switch (e.ListChangedType)
             {
-                case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
-                    // post new items
-                    foreach (var item in e.NewItems)
-                    {
-                        AntelopeRestApi.Post<DatamoduleType>(item as DatamoduleType);
-                    }
+                case ListChangedType.ItemAdded:
+                    // post (insert) new items
+                    var newItem = list[e.NewIndex];
+                    AntelopeRestApi.Post<DatamoduleType>(newItem as DatamoduleType);
+                    
                     break;
-                case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
-                    // delete items
-                    throw new NotSupportedException(e.Action.ToString());
-                    break;
-                case System.Collections.Specialized.NotifyCollectionChangedAction.Replace:
+                case ListChangedType.ItemChanged:
                     // put (update) the items
-                    foreach (var item in e.OldItems)
-                    {
-                        AntelopeRestApi.Put<DatamoduleType>(item as DatamoduleType);
-                    }
+                    var changedItem = list[e.OldIndex];
+                    AntelopeRestApi.Put<DatamoduleType>(changedItem as DatamoduleType);
+                    
                     break;
                 default:
-                    throw new NotSupportedException(e.Action.ToString() + " Action is not supported");
+                    throw new NotSupportedException(e.ListChangedType.ToString() + " Action is not supported");
             }
+        }
+
+        void OnPropertyChanged(object sender, PropertyChangedEventArgs args)
+        {
+            var newItem = AntelopeRestApi.Put<DatamoduleType>(sender as DatamoduleType);
         }
 
         protected virtual void SetComputedProperties(InterfaceDatamoduleType datamodul)

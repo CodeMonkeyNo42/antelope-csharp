@@ -84,6 +84,7 @@ namespace PersistenceModule.Api
         public DatamoduleType Get<DatamoduleType>(int id, int championshipId = 0, int matchId = 0) where DatamoduleType : IDatamodul, new()
         {
             var request = new RestRequest();
+            request.JsonSerializer = new RestSharpDataContractJsonSerializer();
             var datamodule = new DatamoduleType();
 
             var requestUrlPart = datamodule.GetRequestUrlPart();
@@ -124,6 +125,7 @@ namespace PersistenceModule.Api
             var request = new RestRequest();
 
             request.Method = Method.PUT;
+            request.JsonSerializer = new RestSharpDataContractJsonSerializer();
             request.Resource = "/" + datamodul.GetRequestUrlPart() + "/" + datamodul.Id;
 
             request.RequestFormat = DataFormat.Json;
@@ -136,6 +138,8 @@ namespace PersistenceModule.Api
         public List<DatamoduleType> GetCollection<DatamoduleType>() where DatamoduleType : IDatamodul, new()
         {
             var request = new RestRequest();
+            request.JsonSerializer = new RestSharpDataContractJsonSerializer();
+
             var datamodule = new DatamoduleType();
 
             request.Resource = "/" + datamodule.GetRequestUrlPart();

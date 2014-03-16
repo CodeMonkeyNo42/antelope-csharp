@@ -26,7 +26,7 @@ namespace PersistenceModule.Api
 
         public T Deserialize<T>(IRestResponse response)
         {
-            Debug.WriteLine(response.Content);
+            Debug.WriteLine("responsecontent: " + response.Content);
             using (MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(response.Content)))
             {
                 DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(T));
