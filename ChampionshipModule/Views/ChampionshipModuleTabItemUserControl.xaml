@@ -3,7 +3,7 @@
          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
-         Header="Championship" Name="tabitemchampionship" IsSelected="True" FontFamily="Aller" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource MyTabItem}" Background="#FF272627" MouseEnter="TabItem_MouseEnter" MouseLeave="TabItem_MouseLeave" FontSize="24" >
+         Header="Championships" Name="tabitemchampionship" IsSelected="True" FontFamily="Aller" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource MyTabItem}" Background="#FF272627" MouseEnter="TabItem_MouseEnter" MouseLeave="TabItem_MouseLeave" FontSize="24" >
     <TabItem.Resources>
         <ResourceDictionary>
             <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
@@ -35,9 +35,9 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <TextBlock Grid.Column="0" Grid.Row="0" Text="Championships" Foreground="White" VerticalAlignment="Bottom" Margin="50,0,0,0" />
-            <Button Grid.Column="1" Name="addchampionshipbutton" VerticalAlignment="Bottom" Content="Add" Command="{Binding AddChampionshipCommand}" CommandParameter="{Binding ElementName=tabitemchampionship}" x:FieldModifier="public" FontFamily="Aller" />
+            <Button Grid.Column="1" Name="addchampionshipbutton" VerticalAlignment="Bottom" Content="+ Add" Command="{Binding AddChampionshipCommand}" CommandParameter="{Binding ElementName=tabitemchampionship}" x:FieldModifier="public" FontFamily="Aller" Style="{DynamicResource MyGreenButton}" HorizontalAlignment="Center" />
         </Grid>
-        <DataGrid Name="datagridchampionships" x:FieldModifier="public" HeadersVisibility="None" SelectionMode="Single" SelectionUnit="FullRow" Grid.Row="1" ItemsSource="{Binding Championships}" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" GridLinesVisibility="None" AlternatingRowBackground="#FFD4D6D8" AlternationCount="1" BorderBrush="{x:Null}" Margin="50,0" >
+        <DataGrid Name="datagridchampionships" x:FieldModifier="public" HeadersVisibility="Column" SelectionMode="Single" SelectionUnit="FullRow" Grid.Row="1" ItemsSource="{Binding Championships}" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" GridLinesVisibility="All" AlternatingRowBackground="#FFD4D6D8" AlternationCount="1" Margin="50,50" BorderBrush="#FFD4D6D8" HorizontalGridLinesBrush="#FFD4D6D8" VerticalGridLinesBrush="#FFD4D6D8" >
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="*" IsReadOnly="True" FontFamily="Aller" />
                 <DataGridTextColumn Binding="{Binding Duration}" Header="Duration" Width="*" IsReadOnly="True" FontFamily="Aller" >
@@ -78,10 +78,6 @@
             <Button Grid.Row="3" Name="addnewchampionshipok" Content="OK" FontFamily="Aller" Foreground="Black" Command="{Binding AddChampionshipOkCommand}" CommandParameter="{Binding ElementName=tabitemchampionship}" />
             <Button Grid.Row="3" Grid.Column="2" Name="addnewchampionshipcancel" Content="Cancel" Foreground="Black" FontFamily="Aller" Command="{Binding AddChampionshipCancelCommand}" CommandParameter="{Binding ElementName=tabitemchampionship}" />
         </Grid>
-        <StackPanel Grid.Row="2">
-            <DataGrid SelectionMode="Single" SelectionUnit="FullRow" ItemsSource="{Binding Championships}" IsSynchronizedWithCurrentItem="True" AlternatingRowBackground="#FFD4D6D8" AlternationCount="1" IsManipulationEnabled="True" />
-            <TextBlock Text="use enter to commit the changes"/>
-        </StackPanel>
     </Grid>
 </TabItem>
 

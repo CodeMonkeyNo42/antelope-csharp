@@ -72,8 +72,9 @@ namespace LocationModule.ViewModels
                             Refresh(new object());
 
                             tabitem.gridnewlocation.Visibility = Visibility.Collapsed;
-                            tabitem.listboxlocations.Visibility = Visibility.Visible;
+                            tabitem.datagridlocations.Visibility = Visibility.Visible;
                             tabitem.addlocationbutton.Visibility = Visibility.Visible;
+                            tabitem.addnewlocationcancel.Visibility = Visibility.Collapsed;
                         });
                 }
                 return addLocationOkCommand;
@@ -93,8 +94,9 @@ namespace LocationModule.ViewModels
                         {
                             var tabitem = o as LocationModuleTabItemUserControl;
                             tabitem.gridnewlocation.Visibility = Visibility.Collapsed;
-                            tabitem.listboxlocations.Visibility = Visibility.Visible;
+                            tabitem.datagridlocations.Visibility = Visibility.Visible;
                             tabitem.addlocationbutton.Visibility = Visibility.Visible;
+                            tabitem.addnewlocationcancel.Visibility = Visibility.Collapsed;
                         });
                 }
                 return addLocationCancelCommand;
@@ -114,8 +116,9 @@ namespace LocationModule.ViewModels
                         {
                             var tabitem = o as LocationModuleTabItemUserControl;
                             tabitem.gridnewlocation.Visibility = Visibility.Visible;
-                            tabitem.listboxlocations.Visibility = Visibility.Collapsed;
+                            tabitem.datagridlocations.Visibility = Visibility.Collapsed;
                             tabitem.addlocationbutton.Visibility = Visibility.Collapsed;
+                            tabitem.addnewlocationcancel.Visibility = Visibility.Visible;
                         });
                 }
                 return addLocationCommand;

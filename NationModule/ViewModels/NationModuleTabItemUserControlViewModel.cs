@@ -74,8 +74,9 @@ namespace NationModule.ViewModels
                             Refresh(new object());
 
                             tabitem.gridnewnation.Visibility = Visibility.Collapsed;
-                            tabitem.listboxnationss.Visibility = Visibility.Visible;
+                            tabitem.datagridnations.Visibility = Visibility.Visible;
                             tabitem.addnationbutton.Visibility = Visibility.Visible;
+                            tabitem.addnewnationcancel.Visibility = Visibility.Collapsed;
                         });
                 }
                 return addNationOkCommand;
@@ -95,8 +96,9 @@ namespace NationModule.ViewModels
                         {
                             var tabitem = o as NationModuleTabItemUserControl;
                             tabitem.gridnewnation.Visibility = Visibility.Collapsed;
-                            tabitem.listboxnationss.Visibility = Visibility.Visible;
+                            tabitem.datagridnations.Visibility = Visibility.Visible;
                             tabitem.addnationbutton.Visibility = Visibility.Visible;
+                            tabitem.addnewnationcancel.Visibility = Visibility.Collapsed;
 
                         });
                 }
@@ -117,8 +119,9 @@ namespace NationModule.ViewModels
                         {
                             var tabitem = o as NationModuleTabItemUserControl;
                             tabitem.gridnewnation.Visibility = Visibility.Visible;
-                            tabitem.listboxnationss.Visibility = Visibility.Collapsed;
+                            tabitem.datagridnations.Visibility = Visibility.Collapsed;
                             tabitem.addnationbutton.Visibility = Visibility.Collapsed;
+                            tabitem.addnewnationcancel.Visibility = Visibility.Visible;
 
                         });
                 }

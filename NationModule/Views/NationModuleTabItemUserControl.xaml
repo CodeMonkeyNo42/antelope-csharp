@@ -4,86 +4,69 @@
          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
          Name="tabitemnation"
-         Header="Nation" FontFamily="Aller" BorderBrush="{x:Null}" Foreground="White" Background="#FF272627" Style="{DynamicResource MyTabItem}" MouseEnter="TabItem_MouseEnter" MouseLeave="TabItem_MouseLeave" FontSize="24" >
+         Header="Nations" FontFamily="Aller" BorderBrush="{x:Null}" Foreground="White" Background="#FF272627" Style="{DynamicResource MyTabItem}" MouseEnter="TabItem_MouseEnter" MouseLeave="TabItem_MouseLeave" FontSize="24" >
     <TabItem.Resources>
         <ResourceDictionary>
         </ResourceDictionary>
     </TabItem.Resources>
-    <Grid Background="White" >
-        <Grid.RowDefinitions>
-            <RowDefinition Height="200"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Background="#EE7C15" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+    <ScrollViewer VerticalScrollBarVisibility="Auto" >
+        <Grid Background="White" >
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="200"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Column="0" Grid.Row="0" Text="Nations" Foreground="White" VerticalAlignment="Bottom" Margin="50,0,0,0" />
-            <Button Grid.Column="1" Name="addnationbutton" VerticalAlignment="Bottom" Content="Add" Command="{Binding AddNationCommand}" CommandParameter="{Binding ElementName=tabitemnation}" x:FieldModifier="public" FontFamily="Aller" />
+            <Grid Grid.Row="0" Background="#EE7C15" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Nations" Foreground="White" VerticalAlignment="Bottom" Margin="50,0,0,0" />
+                <Button Grid.Column="1" Name="addnationbutton" VerticalAlignment="Bottom" Content="+ Add" Command="{Binding AddNationCommand}" CommandParameter="{Binding ElementName=tabitemnation}" x:FieldModifier="public" FontFamily="Aller" Style="{DynamicResource MyGreenButton}" HorizontalAlignment="Center" />
+                <Button Grid.Column="1" Grid.Row="0" Name="addnewnationcancel" Content="Back" FontFamily="Aller" Command="{Binding AddNationCancelCommand}" CommandParameter="{Binding ElementName=tabitemnation}" Visibility="Collapsed" Style="{DynamicResource MyGreenButton}" HorizontalAlignment="Center" VerticalAlignment="Bottom" x:FieldModifier="public" />
+            </Grid>
+            <DataGrid Name="datagridnations" x:FieldModifier="public" HeadersVisibility="Column" SelectionMode="Single" SelectionUnit="FullRow" Grid.Row="1" ItemsSource="{Binding Nations}" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" GridLinesVisibility="All" AlternatingRowBackground="#FFD4D6D8" AlternationCount="1" Margin="50,50" BorderBrush="#FFD4D6D8" HorizontalGridLinesBrush="#FFD4D6D8" VerticalGridLinesBrush="#FFD4D6D8" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="*" IsReadOnly="True" FontFamily="Aller" />
+                    <DataGridTextColumn Binding="{Binding Continent}" Header="Continent" Width="*" IsReadOnly="True" FontFamily="Aller" >
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Style.Triggers>
+                            <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                <Setter Property="Background" Value="#5FB632" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.CellStyle>
+            </DataGrid>
+            <Grid Grid.Row="2" Visibility="Collapsed" Name="gridnewnation" x:FieldModifier="public" Margin="50,50" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="160" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Name" FontFamily="Aller" Foreground="Black" Margin="20" />
+                <TextBox Grid.Column="1" Name="nationnametextbox" Text="{Binding Name}" FontFamily="Aller" Foreground="Black" Margin="20"  />
+
+                <TextBlock Grid.Row="1" Text="Continent" FontFamily="Aller" Foreground="Black" Margin="20" />
+                <TextBox Grid.Row="1" Grid.Column="1" Name="nationcontinenttextbox" Text="{Binding Continent}" FontFamily="Aller" Foreground="Black" Margin="20"  />
+
+                <Button Grid.Row="2" Grid.Column="1" Name="addnewnationok" Content="Create Nation" FontFamily="Aller" Margin="20" Command="{Binding AddNationOkCommand}" CommandParameter="{Binding ElementName=tabitemnation}" Style="{DynamicResource MyGreenButton}" HorizontalAlignment="Left" />
+                
+            </Grid>
         </Grid>
-        <ListBox Name="listboxnationss" x:FieldModifier="public" Grid.Row="1" ItemsSource="{Binding Nations}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" >
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel IsItemsHost="True" />
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Border BorderBrush="#FF000000" BorderThickness="1,1,1,1" CornerRadius="8,8,8,8" >
-                        <Expander Margin="5" >
-                            <Expander.Header>
-                                <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="Black" FontSize="22" VerticalAlignment="Bottom" FontFamily="Aller" />
-                            </Expander.Header>
-                            <Grid Margin="5">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
-                                </Grid.RowDefinitions>
-                                <TextBlock Margin="5" FontWeight="Bold" FontFamily="Aller Light" Foreground="Black" >Id</TextBlock>
-                                <TextBlock Margin="5" Grid.Column="1" Text="{Binding Id}" FontFamily="Aller Light" Foreground="Black" />
-                                <TextBlock Margin="5" Grid.Row="1" FontWeight="Bold" FontFamily="Aller Light" Foreground="Black" >Name</TextBlock>
-                                <TextBlock Margin="5" Grid.Row="1" Grid.Column="1" Text="{Binding Name}" FontFamily="Aller Light" Foreground="Black" />
-                                <TextBlock Margin="5" Grid.Row="2" FontWeight="Bold" FontFamily="Aller Light" Foreground="Black" >Continent</TextBlock>
-                                <TextBlock Margin="5" Grid.Row="2" Grid.Column="1" Text="{Binding Continent}" FontFamily="Aller Light" Foreground="Black" />
-                                <TextBlock Margin="5" Grid.Row="3" Grid.ColumnSpan="2" Text="Placeholder for Picture" TextAlignment="Center" FontFamily="Aller Light" Foreground="Black" />
-                            </Grid>
-                        </Expander>
-                    </Border>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <Grid Grid.Row="2" Visibility="Collapsed" Name="gridnewnation" x:FieldModifier="public" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-
-            <TextBlock Text="Name" FontFamily="Aller" Foreground="Black" />
-            <TextBox Grid.Column="1" Name="nationnametextbox" Text="{Binding Name}" FontFamily="Aller" Foreground="Black"  />
-
-            <TextBlock Grid.Row="1" Text="Continent" FontFamily="Aller" Foreground="Black" />
-            <TextBox Grid.Row="1" Grid.Column="1" Name="nationcontinenttextbox" Text="{Binding Continent}" FontFamily="Aller" Foreground="Black"  />
-
-            <Button Grid.Row="2" Name="addnewnationok" Content="OK" FontFamily="Aller" Foreground="Black" Command="{Binding AddNationOkCommand}" CommandParameter="{Binding ElementName=tabitemnation}" />
-            <Button Grid.Row="2" Grid.Column="2" Name="addnewnationcancel" Content="Cancel" Foreground="Black" FontFamily="Aller" Command="{Binding AddNationCancelCommand}" CommandParameter="{Binding ElementName=tabitemnation}" />
-        </Grid>
-    </Grid>
+    </ScrollViewer>
 </TabItem>
 

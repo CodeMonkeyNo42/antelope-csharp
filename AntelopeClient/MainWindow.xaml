@@ -13,7 +13,7 @@
         AllowsTransparency="True"
         ResizeMode="CanResizeWithGrip"
         BorderThickness="1" 
-        BorderBrush="Black" Loaded="Window_Loaded" Icon="Resources/antelope-logo.png">
+        BorderBrush="Black" Loaded="Window_Loaded" Icon="Resources/antelope-logo.png" Height="600" Width="1200">
     <DockPanel x:Name="RootWindow">
         <DockPanel x:Name="TitleBar" DockPanel.Dock="Top" MouseDown="TitleBar_MouseDown">
             <Button x:Name="CloseButton" Margin="2" Content=" X " DockPanel.Dock="Right" Click="CloseButton_Click" BorderBrush="{x:Null}" FontFamily="Aller" Style="{DynamicResource MyButton}" />

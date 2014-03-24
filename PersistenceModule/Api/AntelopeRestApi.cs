@@ -24,6 +24,7 @@ namespace PersistenceModule.Api
         string Login { get; set; }
         string Password { get; set; }
         IEventAggregator EventAggregator { get; set; }
+        bool serverIsCertified = false;
 
         public AntelopeRestApi(IEventAggregator eventAggregator)
         {
@@ -48,52 +49,62 @@ namespace PersistenceModule.Api
         /// <param name="chain"></param>
         /// <param name="sslPolicyErrors"></param>
         /// <returns></returns>
-        private static bool CertificateValidationCallBack(
+        private bool CertificateValidationCallBack(
          object sender,
          System.Security.Cryptography.X509Certificates.X509Certificate certificate,
          System.Security.Cryptography.X509Certificates.X509Chain chain,
          System.Net.Security.SslPolicyErrors sslPolicyErrors)
         {
-            // If the certificate is a valid, signed certificate, return true.
-            if (sslPolicyErrors == System.Net.Security.SslPolicyErrors.None)
+            if (!serverIsCertified)
             {
-                return true;
-            }
 
-            // If there are errors in the certificate chain, look at each error to determine the cause.
-            if ((sslPolicyErrors & System.Net.Security.SslPolicyErrors.RemoteCertificateChainErrors) != 0)
-            {
-                if (chain != null && chain.ChainStatus != null)
+                // If the certificate is a valid, signed certificate, return true.
+                if (sslPolicyErrors == System.Net.Security.SslPolicyErrors.None)
                 {
-                    foreach (System.Security.Cryptography.X509Certificates.X509ChainStatus status in chain.ChainStatus)
+                    serverIsCertified = true;
+                    return true;
+                }
+
+                // If there are errors in the certificate chain, look at each error to determine the cause.
+                if ((sslPolicyErrors & System.Net.Security.SslPolicyErrors.RemoteCertificateChainErrors) != 0)
+                {
+                    if (chain != null && chain.ChainStatus != null)
                     {
-                        if ((certificate.Subject == certificate.Issuer) &&
-                           (status.Status == System.Security.Cryptography.X509Certificates.X509ChainStatusFlags.UntrustedRoot))
+                        foreach (System.Security.Cryptography.X509Certificates.X509ChainStatus status in chain.ChainStatus)
                         {
-                            // Self-signed certificates with an untrusted root are valid. 
-                            continue;
-                        }
-                        else
-                        {
-                            if (status.Status != System.Security.Cryptography.X509Certificates.X509ChainStatusFlags.NoError)
+                            if ((certificate.Subject == certificate.Issuer) &&
+                               (status.Status == System.Security.Cryptography.X509Certificates.X509ChainStatusFlags.UntrustedRoot))
                             {
-                                // If there are any other errors in the certificate chain, the certificate is invalid,
-                                // so the method returns false.
-                                return false;
+                                // Self-signed certificates with an untrusted root are valid. 
+                                continue;
+                            }
+                            else
+                            {
+                                if (status.Status != System.Security.Cryptography.X509Certificates.X509ChainStatusFlags.NoError)
+                                {
+                                    // If there are any other errors in the certificate chain, the certificate is invalid,
+                                    // so the method returns false.
+                                    return false;
+                                }
                             }
                         }
                     }
-                }
 
-                // When processing reaches this line, the only errors in the certificate chain are 
-                // untrusted root errors for self-signed certificates. These certificates are valid
-                // for default Exchange server installations, so return true.
-                return true;
+                    // When processing reaches this line, the only errors in the certificate chain are 
+                    // untrusted root errors for self-signed certificates. These certificates are valid
+                    // for default Exchange server installations, so return true.
+                    serverIsCertified = true;
+                    return true;
+                }
+                else
+                {
+                    // In all other cases, return false.
+                    return false;
+                }
             }
             else
             {
-                // In all other cases, return false.
-                return false;
+                return true;
             }
         }
 
