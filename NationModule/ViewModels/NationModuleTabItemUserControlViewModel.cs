@@ -72,7 +72,7 @@ namespace NationModule.ViewModels
                             RepositoryService.NationRepository.Post(newNation);
 
                             Refresh(new object());
-
+                            
                             tabitem.gridnewnation.Visibility = Visibility.Collapsed;
                             tabitem.datagridnations.Visibility = Visibility.Visible;
                             tabitem.addnationbutton.Visibility = Visibility.Visible;

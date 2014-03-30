@@ -1,4 +1,5 @@
-﻿using Interfaces.PersisenceModule.Repositories;
+﻿using Interfaces.PersisenceModule.Datamodule;
+using Interfaces.PersisenceModule.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,8 @@ namespace Interfaces.PersisenceModule.Services
         ILocationRepository LocationRepository { get; }
         INationRepository NationRepository { get; }
         IChampionshipRepository ChampionshipRepository { get; }
-        ITeamRepository TeamRepository { get; }
+        ITeamRepository TeamRepository(IChampionship championship);
+        IGroupRepository GroupRepository(IChampionship championship);
+        IMatchRepository MatchRepository(IChampionship championship);
     }
 }

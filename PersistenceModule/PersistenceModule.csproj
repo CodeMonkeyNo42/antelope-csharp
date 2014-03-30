@@ -55,6 +55,7 @@
       <HintPath>..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.Extensions" />
@@ -71,11 +72,15 @@
     <Compile Include="Api\RestSharpDataContractJsonDeserializer.cs" />
     <Compile Include="Api\RestSharpDataContractJsonSerializer.cs" />
     <Compile Include="Data\Datamodules\Championship.cs" />
+    <Compile Include="Data\Datamodules\Group.cs" />
     <Compile Include="Data\Datamodules\Location.cs" />
+    <Compile Include="Data\Datamodules\Match.cs" />
     <Compile Include="Data\Datamodules\Nation.cs" />
     <Compile Include="Data\Datamodules\Team.cs" />
     <Compile Include="Data\Repositories\ChampionshipRepository.cs" />
+    <Compile Include="Data\Repositories\GroupRepository.cs" />
     <Compile Include="Data\Repositories\LocationRepository.cs" />
+    <Compile Include="Data\Repositories\MatchRepository.cs" />
     <Compile Include="Data\Repositories\NationRepository.cs" />
     <Compile Include="Data\Repositories\Repository.cs" />
     <Compile Include="Data\Repositories\TeamRepository.cs" />

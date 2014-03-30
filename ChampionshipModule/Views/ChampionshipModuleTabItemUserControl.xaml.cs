@@ -1,4 +1,5 @@
 ﻿using ChampionshipModule.ViewModels;
+using Interfaces.PersisenceModule.Datamodule;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +38,21 @@ namespace ChampionshipModule.Views
         {
             if (!IsSelected)
                 Foreground = new SolidColorBrush(new Color() { R = 255, G = 255, B = 255, A = 255 });
+        }
+
+        private void datagridchampionships_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (sender != null)
+            {
+                DataGridRow dgr = sender as DataGridRow;
+                var championship = dgr.Item as IChampionship;
+                
+                var viewModel = DataContext as ChampionshipModuleTabItemUserControlViewModel;
+
+                var tupel = new Tuple<IChampionship, ChampionshipModuleTabItemUserControl>(championship, tabitemchampionship);
+
+                viewModel.RowDoubleClickCommand.Execute(tupel);
+            }
         }
     }
 }

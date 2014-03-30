@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace Interfaces.PersisenceModule.Datamodule
 {
-    public interface ITeam : IDatamodul
+    public interface IGroup : IDatamodul
     {
-        int ChampionshipId { get; set; }
-        int GroupId { get; set; }
-        string Name { get; set; }
-        int Points { get; set; }
+        string Key { get; set; }
     }
 }

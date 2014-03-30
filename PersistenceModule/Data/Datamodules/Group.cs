@@ -9,8 +9,9 @@ using System.Threading.Tasks;
 
 namespace PersistenceModule.Data.Datamodules
 {
+    
     [DataContract]
-    class Team : NotificationObject, IDatamodul, ITeam
+    class Group : NotificationObject, IDatamodul, IGroup
     {
         private int id;
         [DataMember(Name = "id")]
@@ -30,74 +31,20 @@ namespace PersistenceModule.Data.Datamodules
             }
         }
 
-        public int championship_id;
-        [DataMember(Name = "championship_id")]
-        public int ChampionshipId 
+        private string key;
+        [DataMember(Name = "key")]
+        public string Key
         {
             get
             {
-                return championship_id;
+                return key;
             }
             set
             {
-                if (championship_id != value)
+                if (key != value)
                 {
-                    championship_id = value;
-                    RaisePropertyChanged("ChampionshipId");
-                }
-            }
-        }
-
-        private int group_id;
-        [DataMember(Name = "group_id")]
-        public int GroupId 
-        {
-            get
-            {
-                return group_id;
-            }
-            set
-            {
-                if (group_id != value)
-                {
-                    group_id = value;
-                    RaisePropertyChanged("GroupId");
-                }
-            }
-        }
-
-        private string name;
-        [DataMember(Name = "name")]
-        public string Name
-        {
-            get
-            {
-                return name;
-            }
-            set
-            {
-                if (name != value)
-                {
-                    name = value;
-                    RaisePropertyChanged("Name");
-                }
-            }
-        }
-
-        private int points;
-        [DataMember(Name = "points")]
-        public int Points
-        {
-            get
-            {
-                return points;
-            }
-            set
-            {
-                if (points != value)
-                {
-                    points = value;
-                    RaisePropertyChanged("Points");
+                    key = value;
+                    RaisePropertyChanged("Key");
                 }
             }
         }
@@ -155,17 +102,17 @@ namespace PersistenceModule.Data.Datamodules
 
         public object GetPostObject()
         {
-            return new { championship_id = ChampionshipId, group_id = GroupId };
+            return new { key = Key };
         }
 
         public object GetPutObject()
         {
-            return new { championship_id = ChampionshipId, group_id = GroupId };
+            return new { key = Key };
         }
 
         public string GetRequestUrlPart()
         {
-            return "teams";
+            return "groups";
         }
     }
 }

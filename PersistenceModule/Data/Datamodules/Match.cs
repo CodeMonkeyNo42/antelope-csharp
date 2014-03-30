@@ -2,6 +2,7 @@
 using Microsoft.Practices.Prism.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -9,8 +10,9 @@ using System.Threading.Tasks;
 
 namespace PersistenceModule.Data.Datamodules
 {
+    
     [DataContract]
-    class Team : NotificationObject, IDatamodul, ITeam
+    class Match : NotificationObject, IDatamodul, IMatch
     {
         private int id;
         [DataMember(Name = "id")]
@@ -32,7 +34,7 @@ namespace PersistenceModule.Data.Datamodules
 
         public int championship_id;
         [DataMember(Name = "championship_id")]
-        public int ChampionshipId 
+        public int ChampionshipId
         {
             get
             {
@@ -48,59 +50,110 @@ namespace PersistenceModule.Data.Datamodules
             }
         }
 
-        private int group_id;
-        [DataMember(Name = "group_id")]
-        public int GroupId 
+        private string stage;
+        [DataMember(Name = "stage")]
+        public string Stage
         {
             get
             {
-                return group_id;
+                return stage;
             }
             set
             {
-                if (group_id != value)
+                if (stage != value)
                 {
-                    group_id = value;
-                    RaisePropertyChanged("GroupId");
+                    stage = value;
+                    RaisePropertyChanged("Stage");
                 }
             }
         }
 
-        private string name;
-        [DataMember(Name = "name")]
-        public string Name
+
+        private int team1Id;
+        [DataMember(Name = "team1_id")]
+        public int Team1Id
         {
             get
             {
-                return name;
+                return team1Id;
             }
             set
             {
-                if (name != value)
+                if (team1Id != value)
                 {
-                    name = value;
-                    RaisePropertyChanged("Name");
+                    team1Id = value;
+                    RaisePropertyChanged("Team1Id");
                 }
             }
         }
 
-        private int points;
-        [DataMember(Name = "points")]
-        public int Points
+        private int team2Id;
+        [DataMember(Name = "team2_id")]
+        public int Team2Id
         {
             get
             {
-                return points;
+                return team2Id;
             }
             set
             {
-                if (points != value)
+                if (team2Id != value)
                 {
-                    points = value;
-                    RaisePropertyChanged("Points");
+                    team2Id = value;
+                    RaisePropertyChanged("Team2Id");
                 }
             }
         }
+
+
+        private int locationId;
+        [DataMember(Name = "location_id")]
+        public int LocationId
+        {
+            get
+            {
+                return locationId;
+            }
+            set
+            {
+                if (locationId != value)
+                {
+                    locationId = value;
+                    RaisePropertyChanged("LocationId");
+                }
+            }
+        }
+
+        private DateTime startsAt;
+        public DateTime StartsAt
+        {
+            get
+            {
+                return startsAt;
+            }
+            set
+            {
+                if (startsAt != value)
+                {
+                    startsAt = value;
+                    RaisePropertyChanged("StartsAt");
+                }
+            }
+        }
+
+        [DataMember(Name = "starts_at")]
+        public string StartsAtString
+        {
+            get
+            {
+                return StartsAt.ToString("s", CultureInfo.InvariantCulture);
+            }
+            set
+            {
+                StartsAt = DateTime.Parse(value);
+            }
+        }
+
 
         private DateTime created_at;
         public DateTime CreatedAt
@@ -155,17 +208,17 @@ namespace PersistenceModule.Data.Datamodules
 
         public object GetPostObject()
         {
-            return new { championship_id = ChampionshipId, group_id = GroupId };
+            return new { championship_id = ChampionshipId };
         }
 
         public object GetPutObject()
         {
-            return new { championship_id = ChampionshipId, group_id = GroupId };
+            return new { championship_id = ChampionshipId };
         }
 
         public string GetRequestUrlPart()
         {
-            return "teams";
+            return "matches";
         }
     }
 }

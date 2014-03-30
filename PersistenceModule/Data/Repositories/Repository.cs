@@ -17,7 +17,8 @@ namespace PersistenceModule.Data.Repositories
         where DatamoduleType : class, IDatamodul, InterfaceDatamoduleType, new()
     {
         AntelopeRestApi AntelopeRestApi { get; set; }
-        //ConditionalWeakTable<int, BindingList<InterfaceDatamoduleType>> WeakreferenceList { get; set; }
+
+        public IChampionship Championship { get; set; }
 
         public Repository(AntelopeRestApi antelopeRestApi)
         {
@@ -26,7 +27,16 @@ namespace PersistenceModule.Data.Repositories
 
         public InterfaceDatamoduleType Get(int id)
         {
-            var datamodul = AntelopeRestApi.Get<DatamoduleType>(id);
+            DatamoduleType datamodul = null;
+            if (Championship == null)
+            {
+                datamodul = AntelopeRestApi.Get<DatamoduleType>(id);
+            }
+            else
+            {
+                datamodul = AntelopeRestApi.Get<DatamoduleType>(id, Championship.Id);
+            }
+            
             SetComputedProperties(datamodul);
             return datamodul;
         }
@@ -43,7 +53,16 @@ namespace PersistenceModule.Data.Repositories
 
         public BindingList<InterfaceDatamoduleType> GetCollection()
         {
-            var list = AntelopeRestApi.GetCollection<DatamoduleType>();
+            List<DatamoduleType> list = null;
+            if (Championship == null)
+            {
+                list = AntelopeRestApi.GetCollection<DatamoduleType>();
+            }
+            else
+            {
+                list = AntelopeRestApi.GetCollection<DatamoduleType>(Championship.Id);
+            }
+            
             var bindingList = new BindingList<InterfaceDatamoduleType>( new List<InterfaceDatamoduleType>(list) );
 
             foreach (var item in bindingList)

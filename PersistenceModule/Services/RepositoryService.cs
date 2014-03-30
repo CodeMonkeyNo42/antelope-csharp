@@ -1,4 +1,5 @@
-﻿using Interfaces.PersisenceModule.Repositories;
+﻿using Interfaces.PersisenceModule.Datamodule;
+using Interfaces.PersisenceModule.Repositories;
 using Interfaces.PersisenceModule.Services;
 using Microsoft.Practices.Unity;
 using PersistenceModule.Data.Repositories;
@@ -58,17 +59,26 @@ namespace PersistenceModule.Services
             }
         }
 
-        private ITeamRepository teamRepository;
-        public ITeamRepository TeamRepository
+        public ITeamRepository TeamRepository(IChampionship championship)
         {
-            get
-            {
-                if (teamRepository == null)
-                {
-                    teamRepository = UnityContainer.Resolve<ITeamRepository>();
-                }
-                return teamRepository;
-            }
+            ITeamRepository teamRepository = UnityContainer.Resolve<ITeamRepository>();
+            teamRepository.Championship = championship;
+            return teamRepository;
+        }
+
+        
+        public IGroupRepository GroupRepository(IChampionship championship)
+        {
+            IGroupRepository groupRepository = UnityContainer.Resolve<IGroupRepository>();
+            groupRepository.Championship = championship;
+            return groupRepository;
+        }
+
+        public IMatchRepository MatchRepository(IChampionship championship)
+        {
+            IMatchRepository matchRepository = UnityContainer.Resolve<IMatchRepository>();
+            matchRepository.Championship = championship;
+            return matchRepository;
         }
     }
 }

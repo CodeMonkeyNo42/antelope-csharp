@@ -11,12 +11,15 @@ using Interfaces.PersisenceModule.Datamodule;
 using RestSharp.Deserializers;
 using System.Collections.ObjectModel;
 using System.Net;
+using System.Configuration;
+using System.Diagnostics;
+using System.Reflection;
 
 namespace PersistenceModule.Api
 {
     class AntelopeRestApi
     {
-        const string BaseUrl = @"https://antelope.circinus.uberspace.de/";
+        string BaseUrl = @"https://antelope.circinus.uberspace.de/";
         //const string BaseUrl = @"https://antelope:8443/"; // ip für antelope in c:\windows\system32\drivers\etc\hosts konfiguriert
         //const string BaseUrl = @"http://antelope:3000/"; // ip für antelope in c:\windows\system32\drivers\etc\hosts konfiguriert
         //const string BaseUrl = @"http://antelope2:3000/"; // ip für antelope2 in c:\windows\system32\drivers\etc\hosts konfiguriert
@@ -31,6 +34,10 @@ namespace PersistenceModule.Api
             EventAggregator = eventAggregator;
 
             EventAggregator.GetEvent<LoginAndPasswordChangedEvent>().Subscribe(OnLoginAndPasswordChanged);
+
+            var settings = ConfigurationManager.OpenExeConfiguration(Assembly.GetEntryAssembly().Location).AppSettings;
+            BaseUrl = settings.Settings["BaseUrl"].Value;
+            Debug.WriteLine("BaseUrl:" + BaseUrl);
 
             // to ignore errors from selfcertified servers 
             // debug
@@ -208,14 +215,21 @@ namespace PersistenceModule.Api
             return Execute<DatamoduleType>(request);
         }
 
-        public List<DatamoduleType> GetCollection<DatamoduleType>() where DatamoduleType : IDatamodul, new()
+        public List<DatamoduleType> GetCollection<DatamoduleType>(int championshipId = 0) where DatamoduleType : IDatamodul, new()
         {
             var request = new RestRequest();
             request.JsonSerializer = new RestSharpDataContractJsonSerializer();
 
             var datamodule = new DatamoduleType();
 
-            request.Resource = "/" + datamodule.GetRequestUrlPart();
+            if (championshipId > 0)
+            {
+                request.Resource = "/championships/" + championshipId + "/" + datamodule.GetRequestUrlPart();
+            }
+            else
+            {
+                request.Resource = "/" + datamodule.GetRequestUrlPart();
+            }
 
             return Execute<List<DatamoduleType>>(request);
         }

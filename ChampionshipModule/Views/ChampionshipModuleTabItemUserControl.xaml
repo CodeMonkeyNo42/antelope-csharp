@@ -3,6 +3,7 @@
          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
+         xmlns:regions="clr-namespace:Microsoft.Practices.Prism.Regions;assembly=Microsoft.Practices.Prism"
          Header="Championships" Name="tabitemchampionship" IsSelected="True" FontFamily="Aller" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource MyTabItem}" Background="#FF272627" MouseEnter="TabItem_MouseEnter" MouseLeave="TabItem_MouseLeave" FontSize="24" >
     <TabItem.Resources>
         <ResourceDictionary>
@@ -18,66 +19,127 @@
             </Style>
         </ResourceDictionary>
     </TabItem.Resources>
-    <Grid Background="White" >
-        <Grid.RowDefinitions>
-            <RowDefinition Height="200"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Background="#EE7C15" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+    <ScrollViewer VerticalScrollBarVisibility="Auto" >
+        <Grid Name="mastergrid" x:FieldModifier="public" Background="White">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Column="0" Grid.Row="0" Text="Championships" Foreground="White" VerticalAlignment="Bottom" Margin="50,0,0,0" />
-            <Button Grid.Column="1" Name="addchampionshipbutton" VerticalAlignment="Bottom" Content="+ Add" Command="{Binding AddChampionshipCommand}" CommandParameter="{Binding ElementName=tabitemchampionship}" x:FieldModifier="public" FontFamily="Aller" Style="{DynamicResource MyGreenButton}" HorizontalAlignment="Center" />
+            <Grid Name="overviewgrid" Background="White" x:FieldModifier="public" Grid.Row="0" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="200"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Background="#EE7C15" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Column="0" Grid.Row="0" Text="Championships" Foreground="White" VerticalAlignment="Bottom" Margin="50,0,0,0" />
+                    <Button Grid.Column="1" Name="addchampionshipbutton" VerticalAlignment="Bottom" Content="+ Add" Command="{Binding AddChampionshipCommand}" CommandParameter="{Binding ElementName=tabitemchampionship}" x:FieldModifier="public" FontFamily="Aller" Style="{DynamicResource MyGreenButton}" HorizontalAlignment="Center" />
+                </Grid>
+                <DataGrid Name="datagridchampionships" x:FieldModifier="public" HeadersVisibility="Column" SelectionMode="Single" SelectionUnit="FullRow" Grid.Row="1" ItemsSource="{Binding Championships}" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" GridLinesVisibility="All" AlternatingRowBackground="#FFD4D6D8" AlternationCount="1" Margin="50,50" BorderBrush="#FFD4D6D8" HorizontalGridLinesBrush="#FFD4D6D8" VerticalGridLinesBrush="#FFD4D6D8" >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="*" IsReadOnly="True" FontFamily="Aller" />
+                        <DataGridTextColumn Binding="{Binding Duration}" Header="Duration" Width="*" IsReadOnly="True" FontFamily="Aller" >
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                    <DataGrid.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Style.Triggers>
+                                <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                    <Setter Property="Background" Value="#5FB632" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.CellStyle>
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <EventSetter Event="MouseDoubleClick" Handler="datagridchampionships_MouseDoubleClick"/>
+                        </Style>
+                    </DataGrid.RowStyle>
+                </DataGrid>
+                <Grid Grid.Row="1" Visibility="Collapsed" Name="gridnewchampionship" x:FieldModifier="public" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Organizer" FontFamily="Aller" Foreground="Black" />
+                    <ComboBox Grid.Column="1" Name="nationscombobox" ItemsSource="{Binding Nations}" DisplayMemberPath="Name" IsSynchronizedWithCurrentItem="True" FontFamily="Aller" Foreground="Black"  />
+
+                    <TextBlock Grid.Row="1" Text="StartsAt" FontFamily="Aller" Foreground="Black" />
+                    <DatePicker Name="startsatdatetimepicker" Grid.Row="1" Grid.Column="1" FontFamily="Aller" Foreground="Black" />
+
+                    <TextBlock Grid.Row="2" Text="EndsAt" FontFamily="Aller" Foreground="Black" />
+                    <DatePicker Name="endsatdatetimepicker" Grid.Row="2" Grid.Column="2" FontFamily="Aller" Foreground="Black" />
+
+                    <Button Grid.Row="3" Name="addnewchampionshipok" Content="OK" FontFamily="Aller" Foreground="Black" Command="{Binding AddChampionshipOkCommand}" CommandParameter="{Binding ElementName=tabitemchampionship}" />
+                    <Button Grid.Row="3" Grid.Column="2" Name="addnewchampionshipcancel" Content="Cancel" Foreground="Black" FontFamily="Aller" Command="{Binding AddChampionshipCancelCommand}" CommandParameter="{Binding ElementName=tabitemchampionship}" />
+                </Grid>
+            </Grid>
+            <Grid Name="detailgrid" x:FieldModifier="public" Background="White" Grid.Row="1" Visibility="Collapsed" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="200"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Background="#EE7C15" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding SelectedChampionship.Name}" Foreground="White" VerticalAlignment="Bottom" Margin="50,0,0,0" />
+                    <TextBlock Grid.Column="0" Grid.Row="1" Foreground="White" VerticalAlignment="Bottom" Margin="50,0,0,0" >
+                    <Run Text="Organizer: " />
+                    <Run Text="{Binding Organizer.Name}" />
+                    </TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="0" Foreground="White" VerticalAlignment="Bottom" Margin="50,0,0,0" >
+                    <Run Text="Starts at: " />
+                    <Run Text="{Binding SelectedChampionship.StartsAt, StringFormat=dd.MM.yyyy}" />
+                    </TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Foreground="White" VerticalAlignment="Bottom" Margin="50,0,0,0" >
+                    <Run Text="Ends at: " />
+                    <Run Text="{Binding SelectedChampionship.EndsAt, StringFormat=dd.MM.yyyy}" />
+                    </TextBlock>
+                    <Grid Grid.Column="0" Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Button Grid.Column="0" Grid.Row="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Center" VerticalAlignment="Bottom" Command="{Binding DisplayOverviewCommand}" >Overview</Button>
+                        <Button Grid.Column="1" Grid.Row="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Center" VerticalAlignment="Bottom" Command="{Binding DisplayTeamsCommand}" >Teams</Button>
+                        <Button Grid.Column="2" Grid.Row="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Center" VerticalAlignment="Bottom" Command="{Binding DisplayGroupsCommand}" >Groups</Button>
+                        <Button Grid.Column="3" Grid.Row="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Center" VerticalAlignment="Bottom" Command="{Binding DisplayMatchesCommand}" >Matches</Button>
+                    </Grid>
+                </Grid>
+                <ContentControl Grid.Row="1" Background="White" regions:RegionManager.RegionName="ChampionshipDetailsRegion" >
+
+                </ContentControl>
+            </Grid>
         </Grid>
-        <DataGrid Name="datagridchampionships" x:FieldModifier="public" HeadersVisibility="Column" SelectionMode="Single" SelectionUnit="FullRow" Grid.Row="1" ItemsSource="{Binding Championships}" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" GridLinesVisibility="All" AlternatingRowBackground="#FFD4D6D8" AlternationCount="1" Margin="50,50" BorderBrush="#FFD4D6D8" HorizontalGridLinesBrush="#FFD4D6D8" VerticalGridLinesBrush="#FFD4D6D8" >
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="*" IsReadOnly="True" FontFamily="Aller" />
-                <DataGridTextColumn Binding="{Binding Duration}" Header="Duration" Width="*" IsReadOnly="True" FontFamily="Aller" >
-                </DataGridTextColumn>
-            </DataGrid.Columns>
-            <DataGrid.CellStyle>
-                <Style TargetType="DataGridCell">
-                    <Setter Property="BorderThickness" Value="0"/>
-                    <Style.Triggers>
-                        <Trigger Property="DataGridCell.IsSelected" Value="True">
-                            <Setter Property="Background" Value="#5FB632" />
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </DataGrid.CellStyle>
-        </DataGrid>
-        <Grid Grid.Row="1" Visibility="Collapsed" Name="gridnewchampionship" x:FieldModifier="public" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            
-            <TextBlock Text="Organizer" FontFamily="Aller" Foreground="Black" />
-            <ComboBox Grid.Column="1" Name="nationscombobox" ItemsSource="{Binding Nations}" DisplayMemberPath="Name" IsSynchronizedWithCurrentItem="True" FontFamily="Aller" Foreground="Black"  />
-
-            <TextBlock Grid.Row="1" Text="StartsAt" FontFamily="Aller" Foreground="Black" />
-            <DatePicker Name="startsatdatetimepicker" Grid.Row="1" Grid.Column="1" FontFamily="Aller" Foreground="Black" />
-
-            <TextBlock Grid.Row="2" Text="EndsAt" FontFamily="Aller" Foreground="Black" />
-            <DatePicker Name="endsatdatetimepicker" Grid.Row="2" Grid.Column="2" FontFamily="Aller" Foreground="Black" />
-
-            <Button Grid.Row="3" Name="addnewchampionshipok" Content="OK" FontFamily="Aller" Foreground="Black" Command="{Binding AddChampionshipOkCommand}" CommandParameter="{Binding ElementName=tabitemchampionship}" />
-            <Button Grid.Row="3" Grid.Column="2" Name="addnewchampionshipcancel" Content="Cancel" Foreground="Black" FontFamily="Aller" Command="{Binding AddChampionshipCancelCommand}" CommandParameter="{Binding ElementName=tabitemchampionship}" />
-        </Grid>
-    </Grid>
+    </ScrollViewer>
 </TabItem>
 

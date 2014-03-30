@@ -57,6 +57,12 @@ namespace PersistenceModule.ModuleDefinition
             UnityContainer.RegisterType<ITeam, Team>();
             UnityContainer.RegisterType<ITeamRepository, TeamRepository>();
 
+            UnityContainer.RegisterType<IGroup, Group>();
+            UnityContainer.RegisterType<IGroupRepository, GroupRepository>();
+
+            UnityContainer.RegisterType<IMatch, Match>();
+            UnityContainer.RegisterType<IMatchRepository, MatchRepository>();
+
             UnityContainer.RegisterType<IRepositoryService, RepositoryService>();
         }
 

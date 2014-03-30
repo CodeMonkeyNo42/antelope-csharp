@@ -73,6 +73,18 @@
     <Compile Include="Views\ChampionshipModuleTabItemUserControl.xaml.cs">
       <DependentUpon>ChampionshipModuleTabItemUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\GroupsUserControl.xaml.cs">
+      <DependentUpon>GroupsUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MatchesUserControl.xaml.cs">
+      <DependentUpon>MatchesUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OverviewUserControl.xaml.cs">
+      <DependentUpon>OverviewUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TeamsUserControl.xaml.cs">
+      <DependentUpon>TeamsUserControl.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -88,6 +100,22 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\ChampionshipModuleTabItemUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GroupsUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MatchesUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OverviewUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TeamsUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
