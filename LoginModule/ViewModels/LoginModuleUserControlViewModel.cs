@@ -64,7 +64,6 @@ namespace LoginModule.ViewModels
                             EventAggregator.GetEvent<LoginAndPasswordChangedEvent>().Publish(new Tuple<string, string>(Login, password));
                             
 
-
                             // location
                             //var locations = RepositoryService.LocationRepository.GetCollection();
                             //var alocation = locations[0];

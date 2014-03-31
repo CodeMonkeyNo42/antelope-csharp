@@ -122,7 +122,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /I /Y "$(TargetDir)$(ProjectName).dll" "$(SolutionDir)AntelopeClient\bin\debug\Modules\"</PostBuildEvent>
+    <PostBuildEvent>xcopy /I /Y "$(TargetDir)$(ProjectName).dll" "$(SolutionDir)AntelopeClient\bin\$(ConfigurationName)\Modules\"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -14,6 +14,7 @@ using System.Net;
 using System.Configuration;
 using System.Diagnostics;
 using System.Reflection;
+using System.Windows;
 
 namespace PersistenceModule.Api
 {
@@ -136,10 +137,10 @@ namespace PersistenceModule.Api
             request.AddHeader("Content-Type", "application/json");
             request.AddHeader("Accept", "application/json");
             request.AddParameter("AccountSid", Login, ParameterType.UrlSegment);
-            
 
-            var response = client.Execute<T>(request);
-
+            IRestResponse<T> response = null;
+            response = client.Execute<T>(request);
+           
             if (response.ErrorException != null)
             {
                 const string message = "Error retrieving response.  Check inner details for more info.";
@@ -150,12 +151,19 @@ namespace PersistenceModule.Api
             var statusCode = (int)response.StatusCode;
             if(statusCode < 200 || statusCode > 399)
             {
+                if (statusCode == 404)
+                {
+                    string mes = "Could not connect to REST API\nPlease check the BaseUrl in the AntelopeClient.exe.config\n\nThe application will now exit";
+                    MessageBox.Show(mes, "Connection Error", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                    System.Environment.Exit(1);
+                }
                 const string message = "Error HTTP.  Check data for more info.";
                 var exe = new ApplicationException(message);
                 exe.Data["StatusCode"] = (int)response.StatusCode;
                 exe.Data["StatusCodeDescription"] = response.StatusDescription;
                 exe.Data["Content"] = response.Content;
-                throw exe;
+                System.Environment.FailFast(message, exe);
+                //throw exe;
             }
 
             return response.Data;
@@ -193,7 +201,7 @@ namespace PersistenceModule.Api
             request.JsonSerializer = new RestSharpDataContractJsonSerializer();
             request.Resource = "/" + datamodul.GetRequestUrlPart();
 
-            request.RequestFormat = DataFormat.Json;
+            request.RequestFormat = RestSharp.DataFormat.Json;
             //request.AddBody(datamodul.GetPostObject());
             request.AddBody(datamodul);
 
@@ -208,7 +216,7 @@ namespace PersistenceModule.Api
             request.JsonSerializer = new RestSharpDataContractJsonSerializer();
             request.Resource = "/" + datamodul.GetRequestUrlPart() + "/" + datamodul.Id;
 
-            request.RequestFormat = DataFormat.Json;
+            request.RequestFormat = RestSharp.DataFormat.Json;
             // request.AddBody(datamodul.GetPutObject());
             request.AddBody(datamodul);
 
