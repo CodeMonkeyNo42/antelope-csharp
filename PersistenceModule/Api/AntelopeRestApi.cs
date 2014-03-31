@@ -138,8 +138,7 @@ namespace PersistenceModule.Api
             request.AddHeader("Accept", "application/json");
             request.AddParameter("AccountSid", Login, ParameterType.UrlSegment);
 
-            IRestResponse<T> response = null;
-            response = client.Execute<T>(request);
+            var response = client.Execute<T>(request);
            
             if (response.ErrorException != null)
             {
